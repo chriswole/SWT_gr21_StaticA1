@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28010.2003
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATM_App", "ATM_App\ATM_App.csproj", "{9F50A3F9-9A0D-4913-8FAA-40ECD42E167E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATM", "ATM\ATM.csproj", "{7910D9B3-AF4F-4BD5-A4EA-3BE6979F5622}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATMUnitTest", "ATMUnitTest\ATMUnitTest.csproj", "{49F2A2B0-A2B5-4212-A7DF-3F198AC75480}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9F50A3F9-9A0D-4913-8FAA-40ECD42E167E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F50A3F9-9A0D-4913-8FAA-40ECD42E167E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F50A3F9-9A0D-4913-8FAA-40ECD42E167E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F50A3F9-9A0D-4913-8FAA-40ECD42E167E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7910D9B3-AF4F-4BD5-A4EA-3BE6979F5622}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7910D9B3-AF4F-4BD5-A4EA-3BE6979F5622}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7910D9B3-AF4F-4BD5-A4EA-3BE6979F5622}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7910D9B3-AF4F-4BD5-A4EA-3BE6979F5622}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49F2A2B0-A2B5-4212-A7DF-3F198AC75480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49F2A2B0-A2B5-4212-A7DF-3F198AC75480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49F2A2B0-A2B5-4212-A7DF-3F198AC75480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49F2A2B0-A2B5-4212-A7DF-3F198AC75480}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {610CA590-C5F9-46C8-9EA0-90DBCA5D213E}
+	EndGlobalSection
+EndGlobal
