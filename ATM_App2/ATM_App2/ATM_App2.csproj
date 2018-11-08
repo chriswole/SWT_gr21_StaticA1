@@ -43,9 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\LogToFile.cs" />
     <Compile Include="Classes\Track.cs" />
     <Compile Include="Classes\Position.cs" />
     <Compile Include="Classes\Danger.cs" />
+    <Compile Include="Interfaces\ILogToFile.cs" />
+    <Compile Include="Interfaces\ISeperation.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

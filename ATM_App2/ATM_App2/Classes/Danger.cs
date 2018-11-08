@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ATM_App2.Classes
 {
-    class Danger
+    public class Danger
     {
         //Constructor
         public Danger(Track track1, Track track2, int dist)
