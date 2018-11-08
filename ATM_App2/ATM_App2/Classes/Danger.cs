@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ATM_App2
+namespace ATM_App2.Classes
 {
     class Danger
     {
