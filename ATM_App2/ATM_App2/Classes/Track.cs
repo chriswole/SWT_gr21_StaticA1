@@ -23,12 +23,12 @@ namespace ATM_App2.Classes
             timestamp_ = timestamp;
         }
 
-        public string tag_ { get; set; }
-        public Position pos_ { get; set; }
-        public int altitude_ { get; set; }
-        public int hori_velocity_ { get; set; }
-        public int course_ { get; set; }
-        public string timestamp_ { get; set; }
+        public string tag_ { get; private set; }
+        public Position pos_ { get; private set; }
+        public int altitude_ { get; private set; }
+        public int hori_velocity_ { get; private set; }
+        public int course_ { get; private set; }
+        public string timestamp_ { get; private set; }
 
 
         /*
