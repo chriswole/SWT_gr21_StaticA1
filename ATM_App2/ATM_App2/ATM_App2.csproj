@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\LogToFile.cs" />
+    <Compile Include="Classes\Timer.cs" />
     <Compile Include="Classes\Track.cs" />
     <Compile Include="Classes\Position.cs" />
     <Compile Include="Classes\Danger.cs" />
