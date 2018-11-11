@@ -3,10 +3,6 @@ using ATM_App2.Interfaces;
 
 namespace ATM_App2.Events
 {
-    /// <summary>
-    /// Class that logs all event 
-    /// constructor take file path, default in build directory
-    /// </summary>
     public class LogToFile : ILogToFile
     {
         private readonly string _path;
@@ -15,10 +11,7 @@ namespace ATM_App2.Events
         {
             _path = path;
         }
-        /// <summary>
-        /// Logs message in file
-        /// </summary>
-        /// <param name="message"></param>
+       
         public void Log(string message)
         {
             if (!File.Exists(_path))
