@@ -1,78 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.Remoting.Services;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using ATM_App2.Interfaces;
 
-namespace ATM_App2.Classes
+namespace ATM_App2.Events
 {
+    /// <summary>
+    /// Class that logs all event 
+    /// constructor take file path, default in build directory
+    /// </summary>
     public class LogToFile : ILogToFile
     {
-        public LogToFile()
-        {
+        private readonly string _path;
 
+        public LogToFile(string path = @"SeparationLog.txt")
+        {
+            _path = path;
         }
-        public void AddDangerToLog(Danger danger2Log)
+        /// <summary>
+        /// Logs message in file
+        /// </summary>
+        /// <param name="message"></param>
+        public void Log(string message)
         {
-            try
+            if (!File.Exists(_path))
             {
-                //Open or create file
-                StreamWriter sw = File.AppendText("SeparationLog.txt");
-                
-                //Write a line of text
-                sw.WriteLine("{0} and {1} Distance: {2}", danger2Log.track1_.tag_, danger2Log.track2_.tag_, danger2Log.distance_);
-                //Close the file
-                sw.Close();
+                var sr = File.CreateText(_path);
+                sr.Close();
             }
-            catch (Exception e)
-            {
-                //Print out exception if it happened. 
-                Console.WriteLine("Exception: " + e.Message);
-            }
-        }
 
-        public void AddEnteredTrackToLog(Track track2Log)
-        {
-            //if()
-            try
+            using (var sr = File.AppendText(_path))
             {
-                //Open or create file
-                StreamWriter sw = File.AppendText("SeparationLog.txt");
-
-                //Write a line of text
-                sw.WriteLine("Tag {0} has entered the airspace", track2Log.tag_ );
-                //Close the file
-                sw.Close();
-            }
-            catch (Exception e)
-            {
-                //Print out exception if it happened. 
-                Console.WriteLine("Exception: " + e.Message);
-            }
-        }
-        public void AddExitedTrackToLog(Track track2Log)
-        {
-            //if()
-            try
-            {
-                //Open or create file
-                StreamWriter sw = File.AppendText("SeparationLog.txt");
-
-                //Write a line of text
-                sw.WriteLine("Tag {0} has exited the airspace", track2Log.tag_);
-                //Close the file
-                sw.Close();
-            }
-            catch (Exception e)
-            {
-                //Print out exception if it happened. 
-                Console.WriteLine("Exception: " + e.Message);
+                sr.WriteLine(message);
             }
         }
     }
 }
-
-

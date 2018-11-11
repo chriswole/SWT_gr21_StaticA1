@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATM_App2.Classes;
+using ATM_App2.Events;
 
 namespace ATM_App2
 {
@@ -14,9 +15,7 @@ namespace ATM_App2
             Position pos=new Position(24134, 214124);
             Track track=new Track("Hans",pos,2134,134,345,"dd.mm.yyyyy");
             LogToFile log=new LogToFile();
-
-            log.AddEnteredTrackToLog(track);
-            log.AddExitedTrackToLog(track);
+            
             
         }
     }
