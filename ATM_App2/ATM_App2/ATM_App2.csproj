@@ -43,8 +43,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\ATMNotification.cs" />
     <Compile Include="Classes\LogToFile.cs" />
-    <Compile Include="Classes\Timer.cs" />
+    <Compile Include="Events\NotificationEventArgs.cs" />
+    <Compile Include="Events\TrackEnter.cs" />
     <Compile Include="Classes\Track.cs" />
     <Compile Include="Classes\Position.cs" />
     <Compile Include="Classes\Danger.cs" />
