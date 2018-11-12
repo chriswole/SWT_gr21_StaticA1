@@ -43,10 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Events\ATMNotification.cs" />
     <Compile Include="Classes\LogToFile.cs" />
+    <Compile Include="Events\NotificationEventArgs.cs" />
+    <Compile Include="Events\TrackEnteredAirspace.cs" />
     <Compile Include="Classes\Track.cs" />
     <Compile Include="Classes\Position.cs" />
     <Compile Include="Classes\Danger.cs" />
+    <Compile Include="Events\TrackLeftAirspace.cs" />
     <Compile Include="Interfaces\ILogToFile.cs" />
     <Compile Include="Interfaces\ISeperation.cs" />
     <Compile Include="Program.cs" />
