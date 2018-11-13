@@ -1,7 +1,8 @@
 ﻿using System;
 using ATM_App2.Classes;
 using NUnit.Framework;
-using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
+using NSubstitute;
+
 
 namespace ATMTrackUnitTest
 {
@@ -9,7 +10,7 @@ namespace ATMTrackUnitTest
     [Author("Mette Jacobsen, Edited by members of group 21")]
 
 
-    class TrackTest
+   public class TrackTest
     {
 
         Track uut;
@@ -22,9 +23,7 @@ namespace ATMTrackUnitTest
         public void Setup()
         {
             uut = new Track(tag, pos, altitude, hori_velocity, course, timestamp);
-
-
-
+            
         }
 
         [Test]
