@@ -174,8 +174,8 @@ namespace ATMTrackUnitTest
             //Test true self comparison
             result = track1 != track1;
             Assert.That(result, Is.EqualTo(false));
-        }
+        }*/
 
     }
 
-}*/
+}
