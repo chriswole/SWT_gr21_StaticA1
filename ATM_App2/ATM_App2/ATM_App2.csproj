@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\Monito.cs" />
     <Compile Include="Events\ATMNotification.cs" />
     <Compile Include="Classes\LogToFile.cs" />
     <Compile Include="Events\NotificationEventArgs.cs" />
