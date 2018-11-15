@@ -20,8 +20,6 @@ namespace ATM_App2_UnitTest.UnitTestClasses
             _uut = new StringParser();
         }
 
-
-    
         [TestCase("ATR423;39045;8500;14000;20151006213456789", "ATR423", "39045", "8500", "14000", "20151006213456789")]
         [TestCase("ATR600;500;500;14000;20151006213456789", "ATR600", "500", "500", "14000", "20151006213456789")]
         [TestCase("ATR700;12000;12000;14000;20151006213456789", "ATR700", "12000", "12000", "14000", "20151006213456789")]
@@ -33,7 +31,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
             string[] rightTokens = new string[]{token1, token2, token3, token4, token5};
             tokens_ = _uut.ParseDataString(toParse);
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 Assert.That(tokens_[i], Is.EqualTo(rightTokens[i]));
             }
