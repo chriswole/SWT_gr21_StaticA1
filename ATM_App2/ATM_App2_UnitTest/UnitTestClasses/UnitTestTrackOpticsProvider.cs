@@ -79,7 +79,7 @@ namespace ATM_App2_UnitTest
 
             for (int i = 0; i < _tracksForVelocityTest.Length; i++)
             {
-                double distance = _uut.GetDistanceBetweenTracks(_tracksForVelocityTest[i], _comparisonTracksForVelocityTests[i]);
+                double distance = _uut.GetTrackVelocity(_tracksForVelocityTest[i], _comparisonTracksForVelocityTests[i]);
 
                 Assert.That(distance, Is.EqualTo(_results[i]));
             }
