@@ -58,6 +58,7 @@
     <Compile Include="Classes\Monitor.cs" />
     <Compile Include="Classes\Separation.cs" />
     <Compile Include="Classes\TrackFactory.cs" />
+    <Compile Include="Classes\TrackOpticsProvider.cs" />
     <Compile Include="Events\ATMNotification.cs" />
     <Compile Include="Classes\LogToFile.cs" />
     <Compile Include="Events\NotificationEventArgs.cs" />

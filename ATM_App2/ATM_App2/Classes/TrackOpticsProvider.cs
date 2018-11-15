@@ -1,0 +1,66 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace ATM_App2.Classes
+{
+    public interface ITrackOpticsProvider
+    {
+        double GetDistanceBetweenTracks(Track firsTrack, Track secondTrack);
+        double GetTrackVelocity(Track activeTrack, Track passiveTrack);
+        double GetTrackCourse(Track activeTrack, Track passTrack);
+
+    }
+
+    public class TrackOpticsProvider : ITrackOpticsProvider
+    {
+        public double GetDistanceBetweenTracks(Track firsTrack, Track secondTrack)
+        {
+            
+            var dist = firsTrack.pos_ - secondTrack.pos_;
+            var distance = Math.Sqrt((dist.x_ * dist.x_) + (dist.y_ * dist.y_));
+
+            return distance;
+        }
+
+
+        
+        public double GetTrackVelocity(Track activeTrack, Track passiveTrack)
+        {
+            var distance = GetDistanceBetweenTracks(activeTrack, passiveTrack);
+            var time = GetSecondsBetweenTimeStamps(activeTrack.timestamp_, passiveTrack.timestamp_);
+
+            var velocity = distance / time;
+
+            return 0;
+        }   
+
+        public double GetTrackCourse(Track activeTrack, Track passiveTrack)
+        {
+            var angle = Math.Atan2(activeTrack.pos_.y_, activeTrack.pos_.x_) -
+                        Math.Atan2(passiveTrack.pos_.y_, passiveTrack.pos_.x_);
+
+            angle = angle * 360 / (2 * Math.PI);
+            if (angle < 0)
+            {
+                angle = angle + 360;
+            }
+
+            return angle;
+        }
+
+        private double GetSecondsBetweenTimeStamps(string oldTimeStamp, string newTimeStamp)
+        {
+            var firstTime = DateTime.Parse(oldTimeStamp);
+            var secondTime = DateTime.Parse(newTimeStamp);
+
+            double seconds = (firstTime - secondTime).TotalSeconds;
+
+            return seconds;
+        }
+
+    }
+}
