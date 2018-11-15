@@ -38,7 +38,7 @@ Reciever:
 
 	public class myClass2 (EventReciever)
 	{
-		public void OnAirspaceUpdated(object sender, MYargumentName argList)
+		public void OnEventName(object sender, MYargumentName argList)
         {
             // my reaction on event. 
         }
