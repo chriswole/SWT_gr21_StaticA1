@@ -10,36 +10,39 @@ namespace ATM_App2.Classes
         public class Separation //: ISeparation
         {
             private List<Danger> Dangers_ { get; set; }
-            private List<Track> receivedTrack { get; set; }
+            private List<Track> receivedTrack_ { get; set; }
 
+           /* public void OnAirspaceUpdated(object sender, AirspaceTrackArgs arg)
+            {
 
-/*
+            }
 
-
+        */
             public Separation()
             {
                 Dangers_ = new List<Danger>();
             }
 
 
-            public void calculateDistances()
+            public void CalculateDistances(List<Track> trackList)
             {
+                var newTrack = trackList[0];
                 foreach (var track1 in trackList)
                 {
                    
                     // Are the planes within same altitude layer
-                    int alt = Math.Abs(track1.altitude_ - track2.altitude_);
+                    int alt = Math.Abs(newTrack.altitude_ - track1.altitude_);
                     if (alt < 300)
                     {
                         // are the planes too close in xy-plane
-                        Position dist = track1.pos_ - track2.pos_;
+                        Position dist = newTrack.pos_ - track1.pos_;
                         var distance = Math.Sqrt((dist.x_ * dist.x_) + (dist.y_ * dist.y_));
                         if (distance < 5000)
                         {
                             // Is the planes actually the same - if not make a dangerObj
-                            if (track1.tag_ != track2.tag_)
+                            if (newTrack.tag_ != track1.tag_)
                             {
-                                Danger dangerObj = new Danger(track1, track2, (int)distance);
+                                Danger dangerObj = new Danger(newTrack, track1, (int)distance);
                                 Dangers_.Add(dangerObj);
                             }
                         }
@@ -47,7 +50,7 @@ namespace ATM_App2.Classes
                 }
             }
 
-            */
+            
 
             /*
             public void deactivateAlarm()
