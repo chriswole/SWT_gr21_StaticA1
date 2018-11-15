@@ -35,7 +35,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
         }
 
         [Test]
-        public void DataReceived_RightNumberOfTracks()
+        public void DataReceived_RightNumberOfTracksSent()
         {
 
             //setup test data
@@ -62,7 +62,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
         }
 
         [Test]
-        public void DataReceivedAndTrackSent_RightTrack()
+        public void DataReceivedAndTrackSent_RightTrackSent()
         {
 
             //setup test data
@@ -77,9 +77,12 @@ namespace ATM_App2_UnitTest.UnitTestClasses
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
+            Assert.That(track == compareTrack, Is.EqualTo(true));
 
         }
 
+  
+     
     }
 }
 
