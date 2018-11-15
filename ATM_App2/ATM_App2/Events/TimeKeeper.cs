@@ -1,9 +1,8 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Timers;
 
 
@@ -11,29 +10,28 @@ namespace ATM_App2.Events
 {
     public class TimeKeeper
     {
-        private static System.Timers.Timer tmr;
-        private int counter = 0;
 
-        public TimeKeeper()
-        {
-            System.Timers.Timer tmr = new System.Timers.Timer();
-            tmr.Interval = 5000;
-            tmr.Tick += new EventHandler(tmr_Tick);
-        }
+        static System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
 
-        public void tmr_Tick(object sender, EventArgs e)
-        {
-            counter++;
-        }
+        private int counter;
 
         private void startTimer(object sender, EventArgs e)
         {
-            tmr.Start();
+            int counter = 0;
+            timer1.Interval = 5000; // 5 second
+            timer1.Enabled = true;
+            timer1.Tick += new EventHandler(timer1_Tick);
+
         }
 
-        private void stopTimer(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            tmr.Stop();
+           timer1.Enabled = false;
+           
         }
+
+        
     }
 }
+
+

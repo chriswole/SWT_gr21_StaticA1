@@ -17,7 +17,7 @@ namespace ATM_App2.Events
         {
             _atmLog = atmLogEvent ?? new LogToFile();
         }
-        
+
         public override void DetectNotification(Collection<Track> oldTransponderDatas, Collection<Track> newTransponderDatas)
         {
             foreach (var item in oldTransponderDatas.Where(item => newTransponderDatas.All(t => t.tag_ != item.tag_)))
@@ -27,6 +27,5 @@ namespace ATM_App2.Events
                 _atmLog.Log(item.timestamp_ + logString + item.tag_);
             }
         }
-
     }
 }
