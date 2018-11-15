@@ -27,5 +27,6 @@ namespace ATM_App2.Events
                 _atmLog.Log(item.timestamp_ + logString + item.tag_);
             }
         }
+
     }
 }

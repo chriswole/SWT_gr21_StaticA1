@@ -17,7 +17,7 @@ namespace ATM_App2.Events
     {
         private readonly ILogToFile _atmLog;
 
-    
+
         public TrackEnteredAirspace(ILogToFile atmLogEvent = null)
         {
             _atmLog = atmLogEvent ?? new LogToFile();
@@ -33,8 +33,5 @@ namespace ATM_App2.Events
             }
         }
     }
-
-
-
 }
 

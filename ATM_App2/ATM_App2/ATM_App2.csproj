@@ -59,6 +59,7 @@
     <Compile Include="Events\ATMNotification.cs" />
     <Compile Include="Classes\LogToFile.cs" />
     <Compile Include="Events\NotificationEventArgs.cs" />
+    <Compile Include="Events\TimeKeeper.cs" />
     <Compile Include="Events\TrackEnteredAirspace.cs" />
     <Compile Include="Classes\Track.cs" />
     <Compile Include="Classes\Position.cs" />
