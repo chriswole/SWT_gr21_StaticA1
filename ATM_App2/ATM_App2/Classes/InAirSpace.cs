@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ATM_App2.Classes
 {
-    class AirspaceTrackArgs: EventArgs
+    public class AirspaceTrackArgs: EventArgs
     {
-        public List<Track> TracksInAirSpase { get; }
+        public List<Track> TracksInAirSpase { get; set; }
     }
 
-    class InAirSpace
+    public class InAirSpace
     {
         private List<Track> _tracksInAirspace;
 
