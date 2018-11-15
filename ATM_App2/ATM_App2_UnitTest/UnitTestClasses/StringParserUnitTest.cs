@@ -33,7 +33,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
             string[] rightTokens = new string[]{token1, token2, token3, token4, token5};
             tokens_ = _uut.ParseDataString(toParse);
 
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 4; i++)
             {
                 Assert.That(tokens_[i], Is.EqualTo(rightTokens[i]));
             }
