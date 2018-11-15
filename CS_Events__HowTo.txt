@@ -15,11 +15,11 @@ Sender:
 
         public EventHandler<MYargumentName> EventName;
 
-		void function(args)
+		void randomfunction( some args)
 		{
 			// Function doing stuff
 			//making event
-			EventName(VariableToSend)
+			OnEventName(VariableToSend);
 		}
 		
 		
