@@ -52,7 +52,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Classes\InAirSpace.cs" />
     <Compile Include="Classes\Monito.cs" />
+    <Compile Include="Classes\Separation.cs" />
     <Compile Include="Classes\TrackFactory.cs" />
     <Compile Include="Events\ATMNotification.cs" />
     <Compile Include="Classes\LogToFile.cs" />
@@ -64,6 +66,7 @@
     <Compile Include="Events\TrackLeftAirspace.cs" />
     <Compile Include="Interfaces\ILogToFile.cs" />
     <Compile Include="Interfaces\ISeperation.cs" />
+    <Compile Include="Interfaces\IStringParser.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -76,6 +76,7 @@
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTestClasses\StringParserUnitTest.cs" />
+    <Compile Include="UnitTestClasses\UnitTestTrackFactory.cs" />
     <Compile Include="UnitTestClasses\UnitTestTrack.cs" />
     <Compile Include="UnitTestEvents\UnitTestTrackEnteredAirspace.cs" />
     <Compile Include="UnitTestEvents\UnitTestTrackLeftAirspace.cs" />
