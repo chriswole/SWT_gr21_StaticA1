@@ -61,12 +61,12 @@ namespace ATM_App2_UnitTest
         {
             Track[] _tracksForVelocityTest = new Track[]
             {
-                new Track("", new Position(0,0), 0, 0, 0, "0000000000000000")
+                new Track("", new Position(0,0), 0, 0, 0, "20181115193300")
             };
 
             Track[] _comparisonTracksForVelocityTests = new Track[]
             {
-                new Track("", new Position(0, 100), 0, 0, 0, "0000000000000100")
+                new Track("", new Position(0, 100), 0, 0, 0, "20181115193301")
             };
 
             double[] _results = new double[]

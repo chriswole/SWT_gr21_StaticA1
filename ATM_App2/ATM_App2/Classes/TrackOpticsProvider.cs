@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -55,10 +56,18 @@ namespace ATM_App2.Classes
 
         private double GetSecondsBetweenTimeStamps(string oldTimeStamp, string newTimeStamp)
         {
-            var firstTime = DateTime.Parse(oldTimeStamp);
-            var secondTime = DateTime.Parse(newTimeStamp);
+            
+           DateTime firstTime = DateTime.ParseExact(oldTimeStamp, "yyyyMMddHHmmss",
 
-            double seconds = (firstTime - secondTime).TotalSeconds;
+               new DateTimeFormatInfo());
+
+
+            DateTime secondTime = DateTime.ParseExact(newTimeStamp, "yyyyMMddHHmmss",
+
+                new DateTimeFormatInfo());
+
+
+            var seconds = (secondTime - firstTime).TotalSeconds;
 
             return seconds;
         }
