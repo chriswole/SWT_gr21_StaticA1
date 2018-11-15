@@ -3,32 +3,81 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM_App2.Events;
+using ATM_App2.Interfaces;
+using NUnit.Framework.Internal;
 
 namespace ATM_App2.Classes
 {
+    public class DangerlistArgs : EventArgs
+    {
+        public List<Danger> DangerList_ { get; set; }
+
     
+    }
+
+ 
         public class Separation //: ISeparation
         {
             private List<Danger> Dangers_ { get; set; }
-            private List<Track> receivedTrack_ { get; set; }
 
-           /* public void OnAirspaceUpdated(object sender, AirspaceTrackArgs arg)
+            private ILogToFile loggerToFile_;
+            // Eventhandler to subscribe on
+            public EventHandler<DangerlistArgs> DangerListUpdated;
+            public void OnAirspaceUpdated(object sender, AirspaceTrackArgs argList)
             {
-
+                CalculateDistances(argList.TracksInAirSpace);
             }
-        */
-            public Separation()
+
+       
+            public Separation(ILogToFile logger2file)
             {
                 Dangers_ = new List<Danger>();
+                //?? returns the left side if not null, if null right side is returned.
+                loggerToFile_ = logger2file ?? new LogToFile();
             }
 
 
             public void CalculateDistances(List<Track> trackList)
             {
                 var newTrack = trackList[0];
-                foreach (var track1 in trackList)
+                foreach (var dan in Dangers_)
+                {   // if changed track is track1_
+                    if (newTrack.tag_ == dan.track1_.tag_ )
+                    {
+                        // Are the planes within same altitude layer
+                        int alt = Math.Abs(newTrack.altitude_ - dan.track1_.altitude_);
+                        if (alt > 300)
+                        {
+                            // are the planes too close in xy-plane
+                            Position dist = newTrack.pos_ - dan.track1_.pos_;
+                            var distance = Math.Sqrt((dist.x_ * dist.x_) + (dist.y_ * dist.y_));
+                            if (distance > 5000)
+                            {
+                                // remove danger from list, since it is not danger anymore
+                                Dangers_.Remove(dan);
+                            }
+                        }
+                    }
+                    else if(newTrack.tag_ == dan.track2_.tag_)
+                    {   // if changed track is track2_
+                        int alt = Math.Abs(newTrack.altitude_ - dan.track2_.altitude_);
+                        if (alt > 300)
+                        {
+                            // are the planes too close in xy-plane
+                            Position dist = newTrack.pos_ - dan.track2_.pos_;
+                            var distance = Math.Sqrt((dist.x_ * dist.x_) + (dist.y_ * dist.y_));
+                            if (distance > 5000)
+                            {
+                                // remove danger from list, since it is not danger anymore
+                                Dangers_.Remove(dan);
+                            }
+                        }
+                    }
+                }
+                
+            foreach (var track1 in trackList)
                 {
-                   
                     // Are the planes within same altitude layer
                     int alt = Math.Abs(newTrack.altitude_ - track1.altitude_);
                     if (alt < 300)
@@ -41,60 +90,43 @@ namespace ATM_App2.Classes
                             // Is the planes actually the same - if not make a dangerObj
                             if (newTrack.tag_ != track1.tag_)
                             {
+                                int i = 0;
                                 Danger dangerObj = new Danger(newTrack, track1, (int)distance);
+                                foreach (var DangerObject in Dangers_)
+                                {
+                                    if (dangerObj.track1_ == DangerObject.track1_ && dangerObj.track2_ == DangerObject.track2_)
+                                    {
+                                        Dangers_[i] = dangerObj;
+                                    }
+                                    else
+                                    {
+                                        Dangers_.Add(dangerObj);
+                                        
+                                    }
+                                    i++;
+                                }
                                 Dangers_.Add(dangerObj);
                             }
                         }
                     }
                 }
-            }
 
+                // lav Danger list updated event her. 
+                OnDangerListUpdated(Dangers_);
+
+            }
+            
+            
+            protected virtual void OnDangerListUpdated(List<Danger> dangers)
+            {
+                if (DangerListUpdated != null)
+                {
+                    DangerListUpdated(this, new DangerlistArgs(){DangerList_ = dangers});
+                }
+            }
             
 
-            /*
-            public void deactivateAlarm()
-            {
-                if (OldDangers_.SequenceEqual(newDangers_))
-                {
-                    //Clears the OldDanger List, so the new dangers can be added
-                    OldDangers_.Clear();
-                }
-                else
-                {
-                    //Compares newDangers_ with OldDangers_ and removes matching elements from OldDangers_
-                    OldDangers_.Except(newDangers_);
-                }
-            }
-            */
 
-            /*
-            public void raiseAlarm()
-            {
-
-
-                foreach (var dangerObj in newDangers_)
-                {
-                    //Compares newDangers_ with OldDangers_
-                    if (newDangers_.SequenceEqual(OldDangers_))
-                    {
-                        //If Equal, print the tracks
-                        newDangers_.ForEach(danger => Console.Write("Warning, the following planes are too close!\n{0}", newDangers_));
-                    }
-
-                    else
-                    {
-                        //If not equal, add newDangers to OldDangers
-                        newDangers_.AddRange(OldDangers_);
-
-                        //Add new element to Logger
-                        new Logger().AddToLog(dangerObj);
-
-                        //Compares newDangers_ with OldDangers_ and removes matching elements from newDangers_
-                        newDangers_.Except(OldDangers_);
-                    }
-
-                }
-            }*/
         }
    
 }
