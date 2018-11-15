@@ -136,6 +136,7 @@ namespace ATMTrackUnitTest
 
         }
 
+        [Test]
 
         public void Not_Equals_Operator_Result_False()
         {
