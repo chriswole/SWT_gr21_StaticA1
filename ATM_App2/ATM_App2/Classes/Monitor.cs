@@ -6,11 +6,13 @@ using System.Threading.Tasks;
 
 namespace ATM_App2.Classes
 {
-    class Monitor 
+    public class Monitor 
     {
         //Constructor
-        public Monitor()
-        { }
+        public Monitor(string test_)
+        {
+            test_ = "Is full";
+        }
 
         public void InitMonitor()
         {
