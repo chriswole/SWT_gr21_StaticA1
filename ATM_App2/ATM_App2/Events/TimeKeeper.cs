@@ -4,32 +4,29 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Timers;
+using ATM_App2.Classes;
 
 
 namespace ATM_App2.Events
 {
     public class TimeKeeper
     {
+        public EventHandler TimeElapsedIn;
+        static System.Windows.Forms.Timer timer1 =new System.Windows.Forms.Timer();
 
-        static System.Windows.Forms.Timer timer1 = new System.Windows.Forms.Timer();
-
-        private int counter;
-
-        private void startTimer(object sender, EventArgs e)
+        
+        public void startTimer()
         {
-            int counter = 0;
             timer1.Interval = 5000; // 5 second
             timer1.Enabled = true;
-            timer1.Tick += new EventHandler(timer1_Tick);
-
+            timer1.Tick += new EventHandler(TimeElapsedIn);
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+
+        public void stopTimer()
         {
-           timer1.Enabled = false;
-           
+            timer1.Enabled = false;
         }
-
         
     }
 }
