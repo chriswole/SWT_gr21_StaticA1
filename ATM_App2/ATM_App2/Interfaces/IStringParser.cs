@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ATM_App2.Interfaces
 {
-    interface IStringParser
+    public interface IStringParser
     {
+        string[] ParseDataString(string datastr, char separatorChar = ';');
     }
 }

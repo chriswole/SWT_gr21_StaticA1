@@ -40,7 +40,7 @@ namespace ATM_App2.Classes
 
         public EventHandler<BaseTrackArgs> TrackCreated;
 
-        TrackFactory(ITransponderReceiver receiver = null, IStringParser parser = null)
+        public TrackFactory(ITransponderReceiver receiver = null, IStringParser parser = null)
         {
             if (parser != null)
                 parser_ = parser;
