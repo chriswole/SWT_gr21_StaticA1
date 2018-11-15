@@ -6,10 +6,27 @@ using System.Threading.Tasks;
 
 namespace ATM_App2.Classes
 {
-    class Monito //Temporary name until merge is fixed
+    public class Monitor 
     {
+        //Constructor
+        public Monitor(string test_)
+        {
+            test_ = "Is full";
+        }
+
         public void InitMonitor()
         {
+            List<Monitor> airspaceMonitored = new List<Monitor>();
+
+            if (airspaceMonitored != null)
+            {
+                airspaceMonitored.ForEach(Console.WriteLine);
+            }
+
+            else
+            {
+                Console.Write("There are currently no planes in the airspace\n");
+            }
 
         }
 
