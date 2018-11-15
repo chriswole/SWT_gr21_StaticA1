@@ -112,9 +112,6 @@ namespace ATM_App2_UnitTest
 
             #endregion 
 
-            //Track track1 = new Track("", new Position(0, 0), 0, 0, 0, "");
-            //Track track2 = new Track("", new Position(0, 100), 0, 0, 0, "");
-
             for (int i = 0; i < _comparisonTracksForCourseTests.Length; i++)
             {
                 double distance = _uut.GetTrackCourse(_tracksCourseTest[i], _comparisonTracksForCourseTests[i]);
