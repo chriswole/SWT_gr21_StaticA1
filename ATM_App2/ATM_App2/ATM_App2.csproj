@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,12 +54,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\InAirSpace.cs" />
+    <Compile Include="Classes\InOutTrack.cs" />
     <Compile Include="Classes\Monitor.cs" />
     <Compile Include="Classes\Separation.cs" />
     <Compile Include="Classes\TrackFactory.cs" />
     <Compile Include="Events\ATMNotification.cs" />
     <Compile Include="Classes\LogToFile.cs" />
     <Compile Include="Events\NotificationEventArgs.cs" />
+    <Compile Include="Events\TimeKeeper.cs" />
     <Compile Include="Events\TrackEnteredAirspace.cs" />
     <Compile Include="Classes\Track.cs" />
     <Compile Include="Classes\Position.cs" />

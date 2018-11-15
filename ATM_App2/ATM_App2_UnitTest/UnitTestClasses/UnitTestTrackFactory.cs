@@ -37,6 +37,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
         [Test]
         public void DataReceived_RightNumberOfTracks()
         {
+
             //setup test data
             List<string> testData = new List<string>();
             testData.Add("ATR423;12000;12000;14000;20151006213456789");
@@ -76,7 +77,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
             _fakeTransponderReceiver.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData));
 
-            Assert.That(track == compareTrack, Is.EqualTo(true));
+
         }
 
     }
