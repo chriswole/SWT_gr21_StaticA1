@@ -12,7 +12,7 @@ namespace ATM_App2.Classes
     {
         public StringParser() { }
 
-        public string[] ParseDataString(string datastr, char separatorChar)
+        public string[] ParseDataString(string datastr, char separatorChar = ';')
         {
 
             string[] tokens; //Track data tokens as strings
