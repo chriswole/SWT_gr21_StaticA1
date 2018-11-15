@@ -53,6 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\Monito.cs" />
+    <Compile Include="Classes\Separation.cs" />
     <Compile Include="Classes\TrackFactory.cs" />
     <Compile Include="Events\ATMNotification.cs" />
     <Compile Include="Classes\LogToFile.cs" />
