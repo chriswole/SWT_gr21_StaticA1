@@ -8,7 +8,7 @@ namespace ATM_App2.Classes
 {
     public class AirspaceTrackArgs: EventArgs
     {
-        public List<Track> TracksInAirSpase { get; set; }
+        public List<Track> TracksInAirSpace { get; set; }
     }
 
     public class InAirSpace
