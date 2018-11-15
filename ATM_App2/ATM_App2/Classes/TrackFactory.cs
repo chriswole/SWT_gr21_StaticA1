@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM_App2.Interfaces;
 using TransponderReceiver;
 
 namespace ATM_App2.Classes
 {
 
-    public class StringParser
+    public class StringParser: IStringParser
     {
         public StringParser() { }
 
@@ -35,11 +36,11 @@ namespace ATM_App2.Classes
 
 
         ITransponderReceiver receiver_;
-        StringParser parser_;
+        IStringParser parser_;
 
         public EventHandler<BaseTrackArgs> TrackCreated;
 
-        TrackFactory(ITransponderReceiver receiver = null, StringParser parser = null)
+        TrackFactory(ITransponderReceiver receiver = null, IStringParser parser = null)
         {
             if (parser != null)
                 parser_ = parser;
