@@ -27,5 +27,6 @@ namespace ATM_App2.Classes
              Separation.removeActiveDanger -= UpdateMonitor //Unsubscribing from Separation event
              */
         }
+    
     }
 }

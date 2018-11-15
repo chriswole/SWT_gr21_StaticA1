@@ -53,7 +53,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\InAirSpace.cs" />
-    <Compile Include="Classes\Monito.cs" />
+    <Compile Include="Classes\Monitor.cs" />
     <Compile Include="Classes\Separation.cs" />
     <Compile Include="Classes\TrackFactory.cs" />
     <Compile Include="Events\ATMNotification.cs" />

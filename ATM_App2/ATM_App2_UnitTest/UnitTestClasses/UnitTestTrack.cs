@@ -36,17 +36,17 @@ namespace ATMTrackUnitTest
             Assert.That(uut.timestamp_, Is.EqualTo(timestamp));
         }
 
-        //[Test]
-        //public void TrackSetAndGetTest()
-        //{
-        //    int hori_velocity2 = 200;
-        //    int course2 = 89;
-        //    uut.hori_velocity_ = hori_velocity2;
-        //    uut.course_ = course2;
+        [Test]
+        public void TrackSetAndGetTest()
+        {
+            int hori_velocity2 = 200;
+            int course2 = 89;
+            uut.hori_velocity_ = hori_velocity2;
+            uut.course_ = course2;
 
-        //    Assert.That(uut.hori_velocity_, Is.EqualTo(hori_velocity2));
-        //    Assert.That(uut.course_, Is.EqualTo(course2));
-        //}
+            Assert.That(uut.hori_velocity_, Is.EqualTo(hori_velocity2));
+            Assert.That(uut.course_, Is.EqualTo(course2));
+        }
 
         [Test]
         public void Equals_Operator_Result_True()
