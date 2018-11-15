@@ -29,7 +29,7 @@ namespace ATM_App2_UnitTest.UnitTestEvents
         public void Setup()
         {
             _uut = new TrackLeftAirspace(_log = Substitute.For<ILogToFile>());
-            _data1=new Track("plane1", new Position(20000, 50000), 10000, 50000, 56, "1234872334");
+            _data1 = new Track("plane1", new Position(20000, 50000), 10000, 50000, 56, "1234872334");
             _data2 = new Track("plane2");
         }
 
@@ -48,8 +48,8 @@ namespace ATM_App2_UnitTest.UnitTestEvents
         {
             int notificationEventCalled = 0;
             ATMNotification.NotificationEvent += (sender, args) => notificationEventCalled++;
-            
-            _uut.DetectNotification(new Collection<Track>{_data1}, new Collection<Track> ());
+
+            _uut.DetectNotification(new Collection<Track> { _data1 }, new Collection<Track>());
             Assert.That(notificationEventCalled, Is.EqualTo(1));
         }
         [Test]
@@ -79,5 +79,5 @@ namespace ATM_App2_UnitTest.UnitTestEvents
             _log.Received(1).Log("1234872334 TrackLeftAirspace Notification plane1");
         }
     }
-    
+
 }
