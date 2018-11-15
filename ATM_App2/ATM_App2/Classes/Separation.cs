@@ -16,7 +16,6 @@ namespace ATM_App2.Classes
             {
 
             }
-
         */
             public Separation()
             {

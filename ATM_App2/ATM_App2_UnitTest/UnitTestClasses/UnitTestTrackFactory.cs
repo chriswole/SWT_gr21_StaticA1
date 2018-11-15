@@ -52,15 +52,9 @@ namespace ATM_App2_UnitTest.UnitTestClasses
         public void BuildTrack_Test()
         {
          
-
         }
 
   
-
-
-
-
-
         //[Test]
         //public void TestDataReception()
         //{
@@ -97,8 +91,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
         //        Assert.That(_uut.Tracks[i] != Tracks[2], Is.EqualTo(true));
 
         //    }
-
-
+        
         //}
 
 

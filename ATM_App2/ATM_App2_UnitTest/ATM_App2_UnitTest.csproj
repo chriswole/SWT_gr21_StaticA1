@@ -78,6 +78,8 @@
     <Compile Include="UnitTestClasses\StringParserUnitTest.cs" />
     <Compile Include="UnitTestClasses\UnitTestTrackFactory.cs" />
     <Compile Include="UnitTestClasses\UnitTestTrack.cs" />
+    <Compile Include="UnitTestEvents\UnitTestLogToFile.cs" />
+    <Compile Include="UnitTestEvents\UnitTestNotificationEventArgs.cs" />
     <Compile Include="UnitTestEvents\UnitTestTrackEnteredAirspace.cs" />
     <Compile Include="UnitTestEvents\UnitTestTrackLeftAirspace.cs" />
   </ItemGroup>
