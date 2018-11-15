@@ -79,6 +79,7 @@
     <Compile Include="UnitTestClasses\UnitTestMonitor.cs" />
     <Compile Include="UnitTestClasses\UnitTestTrackFactory.cs" />
     <Compile Include="UnitTestClasses\UnitTestTrack.cs" />
+    <Compile Include="UnitTestClasses\UnitTestTrackOpticsProvider.cs" />
     <Compile Include="UnitTestEvents\UnitTestLogToFile.cs" />
     <Compile Include="UnitTestEvents\UnitTestNotificationEventArgs.cs" />
     <Compile Include="UnitTestEvents\UnitTestTrackEnteredAirspace.cs" />

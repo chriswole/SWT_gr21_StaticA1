@@ -11,7 +11,7 @@ using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using TransponderReceiver;
 
-namespace ATM_App2_UnitTest.UnitTestClasses
+namespace ATM_App2_UnitTest
 {
 
     class UnitTestTrackFactory

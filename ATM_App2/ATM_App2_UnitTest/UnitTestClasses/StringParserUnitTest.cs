@@ -7,7 +7,7 @@ using ATM_App2.Classes;
 using NSubstitute;
 using NUnit.Framework;
 
-namespace ATM_App2_UnitTest.UnitTestClasses
+namespace ATM_App2_UnitTest
 {
     class StringParserUnitTest
     {

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ATM_App2.Classes;
 
 namespace ATM_App2.Classes
 {
@@ -43,10 +44,10 @@ namespace ATM_App2.Classes
             var angle = Math.Atan2(activeTrack.pos_.y_, activeTrack.pos_.x_) -
                         Math.Atan2(passiveTrack.pos_.y_, passiveTrack.pos_.x_);
 
-            angle = angle * 360 / (2 * Math.PI);
+            angle = angle * 360.0 / (2 * Math.PI);
             if (angle < 0)
             {
-                angle = angle + 360;
+                angle = angle + 360.0;
             }
 
             return angle;
