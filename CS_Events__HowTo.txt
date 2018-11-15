@@ -1,0 +1,49 @@
+C# Events
+
+Sender: 
+
+	//Argument til event
+	public class MYargumentName: EventArgs
+    {
+        public List<Track> VariableToSend_ { get; set; }
+    }
+	
+	// my class making or using event
+    public class myClass(EventSender)
+    {
+        private List<Track> VariableToSend;
+
+        public EventHandler<MYargumentName> EventName;
+
+		void function(args)
+		{
+			// Function doing stuff
+			//making event
+			EventName(VariableToSend)
+		}
+		
+		
+	
+		protected virtual void OnEventName(List<Track> VariableToSend)
+        {
+			// check for subscribers 
+            if (EventName != null)
+            {
+                EventName(this, new MYargumentName(){VariableToSend_ = VariableToSend});
+            }
+        }
+	}
+	
+Reciever: 
+
+	public class myClass2 (EventReciever)
+	{
+		public void OnAirspaceUpdated(object sender, MYargumentName argList)
+        {
+            // my reaction on event. 
+        }
+	}
+		
+In main: 
+
+		EventSender.EventName += EventReciever.OnAirspaceUpdated
