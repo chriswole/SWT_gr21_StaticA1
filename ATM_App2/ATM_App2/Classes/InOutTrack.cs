@@ -20,6 +20,7 @@ namespace ATM_App2.Classes
         private List<Track> ListIn;
         private List<Track> ListOut;
         private List<TimeKeeper> TimerListIn;
+        private List<TimeKeeper> TimerListOut;
         public EventHandler<EnteredTrackArgs> listInUpdated;
         public EventHandler<LeftTrackArgs> listOutUpdated;
         public void OnEnteredTrack(object sender, TrackArgs totrack)
@@ -60,6 +61,13 @@ namespace ATM_App2.Classes
             TimerListIn.Remove(TimerListIn[0]);
             ListIn.Remove(ListIn[0]);
             OnListInUpdated(ListIn);
+        }
+        public void TimeElapsedOut(object sender, EventArgs e)
+        {
+            TimerListOut[0].stopTimer();
+            TimerListOut.Remove(TimerListOut[0]);
+            ListOut.Remove(ListOut[0]);
+            OnListOutUpdated(ListOut);
         }
     }
 
