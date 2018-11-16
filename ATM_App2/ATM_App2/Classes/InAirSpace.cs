@@ -4,26 +4,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace ATM_App2.Classes
 {
-    public class TrackArgs : EventArgs  //For enter exit events
-    {
-        public Track newTrack_; 
-    }
-
-    public class AirspaceTrackArgs: EventArgs
-    {
-        public List<Track> TracksInAirSpace { get; set; }
-    }
-
+    
     public class InAirSpace
     {
         private List<Track> _tracksInAirspace;
         private Track _currenTrack { get; set; }
+        private ITrackOpticsProvider opticsProvider_ { get; set; }
 
         public EventHandler<AirspaceTrackArgs> AirspaceUpdated;
         public EventHandler<TrackArgs> EnteredTrack;
         public EventHandler<TrackArgs> LeavingTrack;
+
+        public InAirSpace(ITrackOpticsProvider opticsProvider)
+        {
+            opticsProvider_ = opticsProvider;
+        }
 
         public void OnTrackCreated(object sender, BaseTrackArgs args)
         {

@@ -6,14 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 using ATM_App2.Classes;
 using ATM_App2.Interfaces;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using NUnit.Framework;
 using NUnit.Framework.Constraints;
 using TransponderReceiver;
+using Assert = NUnit.Framework.Assert;
 
 namespace ATM_App2_UnitTest
 {
 
+    [TestClass]
     class UnitTestTrackFactory
     {
 
@@ -80,8 +83,6 @@ namespace ATM_App2_UnitTest
             Assert.That(track == compareTrack, Is.EqualTo(true));
 
         }
-
-  
      
     }
 }

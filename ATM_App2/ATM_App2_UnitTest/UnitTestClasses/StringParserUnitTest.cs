@@ -4,11 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATM_App2.Classes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using NUnit.Framework;
+using Assert = NUnit.Framework.Assert;
 
 namespace ATM_App2_UnitTest
 {
+    [TestClass]
     class StringParserUnitTest
     {
         private StringParser _uut;
