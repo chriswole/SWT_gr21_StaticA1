@@ -21,103 +21,53 @@ namespace ATM_App2_UnitTest
 
         }
 
-        [Test]
-        public void GetDistanceBetweenTracksTest()
+        [TestCase(0,0,0, 100, 100.0)]
+        public void GetDistanceBetweenTracksTest(int x1, int y1, int x2, int y2, double result)
         {
 
             //setup
-            #region 
-            Track[]_tracksForDistanceTests = new Track[]
-            {
-                new Track("", new Position(0,0), 0, 0, 0, "")
-            };
+            Track firsdTrack = new Track("", new Position(x1, y1), 0, 0, 0, "");
+            Track secondTrack = new Track("", new Position(x2, y2), 0, 0, 0, "");
 
-            Track[] _tracksForDistanceComparison_Tests = new Track[]
-            {
-                new Track("", new Position(0, 100), 0, 0, 0, "")
-            };
+            //Act
+            double distance = _uut.GetDistanceBetweenTracks(firsdTrack, secondTrack);
 
-            double[] _results = new double[]
-            {
-                100.0
-            };
-
-            #endregion 
-
-            //Track track1 = new Track("", new Position(0, 0), 0, 0, 0, "");
-            //Track track2 = new Track("", new Position(0, 100), 0, 0, 0, "");
-
-            for (int i = 0; i < _tracksForDistanceTests.Length; i++)
-            {
-                double distance = _uut.GetDistanceBetweenTracks(_tracksForDistanceTests[i], _tracksForDistanceComparison_Tests[i]);
-
-                Assert.That(distance, Is.EqualTo(_results[i]));
-            } 
-           
+            //Assert
+            Assert.That(distance, Is.EqualTo(result));  
         }
 
-        [Test]
-        public void GetTrackVelocityTest()
-        {
-            Track[] _tracksForVelocityTest = new Track[]
-            {
-                new Track("", new Position(0,0), 0, 0, 0, "20181115193300")
-            };
 
-            Track[] _comparisonTracksForVelocityTests = new Track[]
-            {
-                new Track("", new Position(0, 100), 0, 0, 0, "20181115193301")
-            };
-
-            double[] _results = new double[]
-            {
-                100.0
-            };
-
-            //Track track1 = new Track("", new Position(0, 0), 0, 0, 0, "");
-            //Track track2 = new Track("", new Position(0, 100), 0, 0, 0, "");
-
-            for (int i = 0; i < _tracksForVelocityTest.Length; i++)
-            {
-                double distance = _uut.GetTrackVelocity(_tracksForVelocityTest[i], _comparisonTracksForVelocityTests[i]);
-
-                Assert.That(distance, Is.EqualTo(_results[i]));
-            }
-        }
-
-        [Test]
-        public void GetTrackCourseTest()
+        [TestCase(0, 0, "20181115193300", 0, 100, "20181115193301", 100.0)]
+        public void GetTrackVelocityTest(int x1, int y1, string timestamp1, 
+                                         int x2, int y2, string timestamp2, double result)
         {
             //setup
-            #region 
-            Track[] _tracksCourseTest = new Track[]
-            {
-                new Track("", new Position(100,100), 0, 0, 0, ""),
-                new Track("", new Position(0,10), 0, 0, 0, ""),
-                new Track("", new Position(0,10), 0, 0, 0, "")
-            };
+            Track firsdTrack = new Track("", new Position(x1, y1), 0, 0, 0, timestamp1);
+            Track secondTrack = new Track("", new Position(x2, y2), 0, 0, 0, timestamp2);
 
-            Track[] _comparisonTracksForCourseTests = new Track[]
-            {
-                new Track("", new Position(100, 100), 0, 0, 0, ""),
-                new Track("", new Position(0,0), 0, 0, 0, ""),
-                new Track("", new Position(0,-10), 0, 0, 0, "")
+            //Act
+            double velocity = _uut.GetTrackVelocity(firsdTrack, secondTrack);
 
-            };
+            //Assert
+            Assert.That(velocity, Is.EqualTo(result));
 
-            double[] _results = new double[]
-            {
-                0, 90, 180
-            };
+            
+        }
 
-            #endregion 
+        [TestCase(100, 100, 100, 100, 0)]
+        [TestCase(0, 10, 0, 0, 90)]
+        [TestCase(0, 10, 0, -10, 180)]
+        public void GetTrackCourseTest(int x1, int y1, int x2, int y2, double result)
+        {
+            //setup
+            Track firsdTrack = new Track("", new Position(x1, y1), 0, 0, 0, "");
+            Track secondTrack = new Track("", new Position(x2, y2), 0, 0, 0, "");
 
-            for (int i = 0; i < _comparisonTracksForCourseTests.Length; i++)
-            {
-                double distance = _uut.GetTrackCourse(_tracksCourseTest[i], _comparisonTracksForCourseTests[i]);
+            //Act
+            double course = _uut.GetTrackCourse(firsdTrack, secondTrack);
 
-                Assert.That(distance, Is.EqualTo(_results[i]));
-            }
+            //Assert
+            Assert.That(course, Is.EqualTo(result));
         }
     }
 }

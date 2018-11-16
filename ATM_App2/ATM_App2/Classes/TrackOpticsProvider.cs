@@ -37,7 +37,7 @@ namespace ATM_App2.Classes
 
             var velocity = distance / time;
 
-            return 0;
+            return velocity;
         }   
 
         public double GetTrackCourse(Track activeTrack, Track passiveTrack)
