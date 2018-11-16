@@ -57,6 +57,7 @@ namespace ATM_App2_UnitTest
         [TestCase(100, 100, 100, 100, 0)]
         [TestCase(0, 10, 0, 0, 90)]
         [TestCase(0, 10, 0, -10, 180)]
+        [TestCase(0, -10, 0, 10, 180)]
         public void GetTrackCourseTest(int x1, int y1, int x2, int y2, double result)
         {
             //setup
