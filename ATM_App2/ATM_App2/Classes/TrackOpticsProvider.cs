@@ -46,10 +46,11 @@ namespace ATM_App2.Classes
                         Math.Atan2(passiveTrack.pos_.y_, passiveTrack.pos_.x_);
 
             angle = angle * 360.0 / (2 * Math.PI);
-            if (angle < 0)
-            {
-                angle = angle + 360.0;
-            }
+            //if (angle < 0)
+            //{
+            //    angle = angle + 360.0;
+            //}
+            angle = ((angle % 360) + 360) % 360;
 
             return angle;
         }
