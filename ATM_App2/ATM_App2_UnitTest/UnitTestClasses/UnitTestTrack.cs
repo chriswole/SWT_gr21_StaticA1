@@ -1,14 +1,16 @@
 ﻿using System;
 using ATM_App2.Classes;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using NSubstitute;
+using Assert = NUnit.Framework.Assert;
 
 
 namespace ATMTrackUnitTest
 {
     [TestFixture]
     [Author("Mette Jacobsen, Edited by members of group 21")]
-
+    [TestClass]
 
     public class TrackTest
     {
