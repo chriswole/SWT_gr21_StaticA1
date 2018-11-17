@@ -26,10 +26,7 @@ namespace ATM_App2.Classes
         }
     }
 
-    public class BaseTrackArgs : EventArgs
-    {
-        public Track Track { get; set; }
-    }
+    
 
     public class TrackFactory
     {
@@ -38,7 +35,7 @@ namespace ATM_App2.Classes
         ITransponderReceiver receiver_;
         IStringParser parser_;
 
-        public EventHandler<BaseTrackArgs> TrackCreated;
+        public EventHandler<TrackArgs> TrackCreated;
 
         public TrackFactory(ITransponderReceiver receiver, IStringParser parser)
         {
@@ -80,8 +77,7 @@ namespace ATM_App2.Classes
 
         protected virtual void OnTrackCreated(Track track)
         {
-            if (TrackCreated != null)
-                TrackCreated(this, new BaseTrackArgs() { Track = track });
+            TrackCreated?.Invoke(this, new TrackArgs() { newTrack_ = track });
         }
 
     }

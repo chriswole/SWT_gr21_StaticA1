@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace ATM_App2.Classes
 {
+
+    
     public class TrackArgs : EventArgs  //For enter exit events
     {
         public Track newTrack_ { get; set; }

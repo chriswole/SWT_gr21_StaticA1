@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\InAirSpace.cs" />
-    <Compile Include="Classes\InAirspaceEventArgs.cs" />
+    <Compile Include="Classes\EventArgs.cs" />
     <Compile Include="Classes\InOutTrack.cs" />
     <Compile Include="Classes\Monitor.cs" />
     <Compile Include="Classes\Separation.cs" />
