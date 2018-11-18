@@ -4,24 +4,14 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ATM_App2.Interfaces;
 
 
 namespace ATM_App2.Classes
 {
     
-    public class InAirSpace
+    public class InAirSpace : IInAirSpace
     {
-        private List<Track> TracksInAirspace_;
-
-        private Track ReceivedTrack_;
-        private Track TrackIdentifiedInList_ { get; set; }
-
-        private ITrackOpticsProvider opticsProvider_;
-
-        //Air space definition:
-        private Position southWestCorner = new Position(10000, 10000), northEastCorner = new Position(90000, 90000);
-        private int lowest_altitude = 500, highest_altitude = 20000;
-
         //event handlers
         public EventHandler<AirspaceTrackArgs> AirspaceUpdated;
         public EventHandler<TrackArgs> EnteredTrack;
@@ -30,24 +20,25 @@ namespace ATM_App2.Classes
         public InAirSpace(ITrackOpticsProvider opticsProvider)
         {
             opticsProvider_ = opticsProvider;
+            TracksInAirspace_ = new List<Track>();
         }
 
         public void OnTrackCreated(object sender, TrackArgs args)
         {
             ReceivedTrack_ = args.newTrack_;
             int oldIndexOfReceivedTrack;
-           
+
             //Is Received Track Within Airspace and is it already tracked:
             bool ReceivedTrackIsInAirSpace = InScope(ReceivedTrack_);
             bool ReceivedTrackIdentifiedInList = InList(ReceivedTrack_, out oldIndexOfReceivedTrack);
 
             //what event to send:
-            if (ReceivedTrackIdentifiedInList) 
+            if (ReceivedTrackIdentifiedInList)
             {
                 if (ReceivedTrackIsInAirSpace) //update Track
                 {
-                   UpdateAirSpaceEventhandler(ref ReceivedTrack_, oldIndexOfReceivedTrack);
-                    
+                    UpdateAirSpaceEventhandler(ref ReceivedTrack_, oldIndexOfReceivedTrack);
+
                 }
                 else  // Track Left
                 {
@@ -63,36 +54,49 @@ namespace ATM_App2.Classes
                 }
 
                 //else discard ReceivedTrack_
-                
+
             }
 
-        //exist on list?
-        //yes
-        //in scope?
-        //no - left:
-        // send LeavingTrack Event
-        // airspaceupdated event
-        // delete old track
-        //yes - update
-        // calc speed and course
-        // delete old Track
-        // add new track to list top
-        // send AirspacedUpdated Event - _tracksInAirspace
+            //exist on list?
+            //yes
+            //in scope?
+            //no - left:
+            // send LeavingTrack Event
+            // airspaceupdated event
+            // delete old track
+            //yes - update
+            // calc speed and course
+            // delete old Track
+            // add new track to list top
+            // send AirspacedUpdated Event - _tracksInAirspace
 
-        // no 
-        //in scope?
-        //yes - new:
-        // add track to list
-        // send EnteringTrack Event
-        // send AirspacedUpdated Event - _tracksInAirspace
+            // no 
+            //in scope?
+            //yes - new:
+            // add track to list
+            // send EnteringTrack Event
+            // send AirspacedUpdated Event - _tracksInAirspace
 
-        //no - fuck off
-        // discard Track
-    }
+            //no - fuck off
+            // discard Track
+        }
+
+
+        //Air space definition:  -------------------------------
+        private Position southWestCorner = new Position(10000, 10000), northEastCorner = new Position(90000, 90000);
+        private int lowest_altitude = 500, highest_altitude = 20000;
+
+        private List<Track> TracksInAirspace_ { get; set; }
+        
+        //----------------------------------------
+        
+        private Track ReceivedTrack_;
+
+        private ITrackOpticsProvider opticsProvider_;
 
         void EnterinTrackEventHandler(Track EnteringTrack)
         {
-            TracksInAirspace_.Add(EnteringTrack);
+            TracksInAirspace_.Insert(0, EnteringTrack);
             OnEnteredTrack(EnteringTrack);
             OnAirspaceUpdated(TracksInAirspace_);
         }
@@ -114,12 +118,12 @@ namespace ATM_App2.Classes
 
         protected virtual void OnAirspaceUpdated(List<Track> UpdatedAirspaceList)
         {
-            AirspaceUpdated?.Invoke(this, new AirspaceTrackArgs() { TracksInAirSpace = UpdatedAirspaceList });
+            AirspaceUpdated?.Invoke(this, new AirspaceTrackArgs(TracksInAirspace_));
         }
 
         protected virtual void OnEnteredTrack(Track TrackThatEntered)
         {
-            EnteredTrack?.Invoke(this, new TrackArgs(){newTrack_ = TrackThatEntered});
+            EnteredTrack?.Invoke(this, new TrackArgs(TrackThatEntered));
         }
 
         protected virtual void OnLeavingTrack(Track TrackThatLeft)

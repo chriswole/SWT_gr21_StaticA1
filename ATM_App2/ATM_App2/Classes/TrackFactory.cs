@@ -28,14 +28,14 @@ namespace ATM_App2.Classes
 
     
 
-    public class TrackFactory
+    public class TrackFactory : ITrackFactory
     {
 
 
         ITransponderReceiver receiver_;
         IStringParser parser_;
 
-        public EventHandler<TrackArgs> TrackCreated;
+        public event EventHandler<TrackArgs> TrackCreated;
 
         public TrackFactory(ITransponderReceiver receiver, IStringParser parser)
         {

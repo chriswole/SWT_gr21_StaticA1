@@ -69,9 +69,11 @@
     <Compile Include="Classes\Position.cs" />
     <Compile Include="Classes\Danger.cs" />
     <Compile Include="Events\TrackLeftAirspace.cs" />
+    <Compile Include="Interfaces\IInAirSpace.cs" />
     <Compile Include="Interfaces\ILogToFile.cs" />
     <Compile Include="Interfaces\ISeperation.cs" />
     <Compile Include="Interfaces\IStringParser.cs" />
+    <Compile Include="Interfaces\ITrackFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
