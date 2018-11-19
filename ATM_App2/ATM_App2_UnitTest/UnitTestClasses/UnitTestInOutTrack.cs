@@ -10,26 +10,26 @@ using ATM_App2.Classes;
 
 namespace ATM_App2_UnitTest.UnitTestClasses
 {
-    [TestClass]
-    public class UnitTestInOutTrack
-    {
-        private InOutTrack _uut;
-        private EnteredTrackArgs _enteredTrack;
-        private LeftTrackArgs _leftTrack;
-        private List<Track> _track1;
-        private List<Track> _track2;
+    //[TestClass]
+    //public class UnitTestInOutTrack
+    //{
+    //    private InOutTrack _uut;
+    //    private EnteredTrackArgs _enteredTrack;
+    //    private LeftTrackArgs _leftTrack;
+    //    private List<Track> _track1;
+    //    private List<Track> _track2;
 
 
-        [SetUp]
-        public void Setup()
-        {
-            _uut = new InOutTrack();
+    //    [SetUp]
+    //    public void Setup()
+    //    {
+    //        _uut = new InOutTrack();
 
-        }
-        [Test]
-        public void TestMethod1()
-        {
+    //    }
+    //    [Test]
+    //    public void TestMethod1()
+    //    {
             
-        }
-    }
+    //    }
+    //}
 }
