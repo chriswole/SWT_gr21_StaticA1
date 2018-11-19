@@ -15,7 +15,7 @@ namespace ATM_App2.Classes
     {
         public List<Track> listLeft { get; set; }
     }
-    class InOutTrack
+    public class InOutTrack
     {
         private List<Track> ListIn;
         private List<Track> ListOut;
@@ -23,6 +23,10 @@ namespace ATM_App2.Classes
         private List<TimeKeeper> TimerListOut;
         public EventHandler<EnteredTrackArgs> listInUpdated;
         public EventHandler<LeftTrackArgs> listOutUpdated;
+
+        public InOutTrack()
+        {
+         }
         public void OnEnteredTrack(object sender, TrackArgs totrack)
         {
             TimeKeeper mytime = new TimeKeeper();
