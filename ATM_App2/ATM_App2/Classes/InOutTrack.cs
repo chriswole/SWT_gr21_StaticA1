@@ -30,7 +30,7 @@ namespace ATM_App2.Classes
         public void OnEnteredTrack(object sender, TrackArgs totrack)
         {
             TimeKeeper mytime = new TimeKeeper();
-            mytime.startTimer();
+            mytime.startTimerIn();
             TimerListIn.Add(mytime);
             ListIn.Add(totrack.newTrack_);
             OnListInUpdated(ListIn);
@@ -47,7 +47,7 @@ namespace ATM_App2.Classes
         public void OnLeavingTrack(object sender, TrackArgs totrack)
         {
             TimeKeeper mytime = new TimeKeeper();
-            mytime.startTimer();
+            mytime.startTimerOut();
             ListOut.Add(totrack.newTrack_);
             OnListOutUpdated(ListOut);//do stuff
         }
