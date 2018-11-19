@@ -40,54 +40,60 @@ namespace ATM_App2_UnitTest
 
         }
 
+
+        
+        #region OnTrackCreated_ResultsEnteringTrack_Tests
+        
         [Test]
-        public void CorrectEnteredTrackEventSent()
+        public void OnTrackCreated_ResultEnteringTrack_CorrectEnteredTrackEventSent()
         {
 
             Track compareTrack = new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789");
 
-
-
-            int eventcounter = 0;
             Track enteredTrack = new Track();
             List<Track> newAirspace = new List<Track>();
-            _uut.EnteredTrack += (o, arg) =>
-            {
-                enteredTrack = arg.newTrack_;
-                eventcounter++;
-            };
+            _uut.EnteredTrack += (o, arg) => { enteredTrack = arg.newTrack_; };
+
+            fakeTrackFactory_.TrackCreated
+                += Raise.EventWith(this, new TrackArgs(compareTrack));
+
+            Assert.That(enteredTrack == compareTrack, Is.EqualTo(true));
+        }
+
+        [Test]
+        public void OnTrackCreated_ResultEnteringTrack_BeginWithEmptyAirspaceList_CorrectUpdatedAirSpaceEventSent()
+        {
+
+            Track compareTrack = new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789");
+            
+
+            
+            List<Track> newAirspace = new List<Track>();
+           
             _uut.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
 
             fakeTrackFactory_.TrackCreated
                 += Raise.EventWith(this, new TrackArgs(compareTrack));
-            
 
-            Assert.That(eventcounter, Is.EqualTo(1));
 
-            Assert.That(enteredTrack == compareTrack, Is.EqualTo(true));
+            Assert.That(newAirspace.Count, Is.EqualTo(1));
             Assert.That(newAirspace[0] == compareTrack, Is.EqualTo(true));
-
-
         }
 
         [Test]
-        public void CorrectAirUpdatedEventSent()
+        public void OnTrackCreated_ResultEnteringTrack_BeginWithTracksInAirSpaceList_LastTrackCreatedFirstInListSentInUpdateEvent()
         {
+            Track[] _testTracks = new Track[]
+            {
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                new Track("BB8832", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                new Track("CC8832", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+            };
 
-           Track[] _testTracks = new Track[]
-           {
-               new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
-               new Track("BB8832", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
-               new Track("ATR423", new Position(14000, 14000), 14000, 0, 0, "20151006213456790")
-           };
-
-            int eventcounter = 0;
-           
             List<Track> newAirspace = new List<Track>();
-            
+
             _uut.AirspaceUpdated += (o, args) =>
             {
-                eventcounter++;
                 newAirspace = args.TracksInAirSpace;
             };
 
@@ -97,20 +103,206 @@ namespace ATM_App2_UnitTest
                 fakeTrackFactory_.TrackCreated
                     += Raise.EventWith(this, new TrackArgs(track));
             }
-            
-
-
-            Assert.That(eventcounter, Is.EqualTo(_testTracks.Length));
 
             Assert.That(newAirspace[0] != _testTracks[0], Is.EqualTo(true));
-            Assert.That(newAirspace.Count, Is.EqualTo(2));
-            Assert.That(newAirspace[0].tag_ == _testTracks[0].tag_, Is.EqualTo(true));
-
-
+            Assert.That(newAirspace[0] == _testTracks[_testTracks.Length - 1], Is.EqualTo(true));
         }
 
-    /*    [Test]
-        public void CorrectLeavingTrackEventSent()
+
+        [Test]
+        public void OnTrackCreated_ResultsEnteringTrack_BeginWithTracksInAirSpaceList_RightNumberInListSentInUpdateEvent()
+        {
+            Track[] _testTracks = new Track[]
+            {
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                new Track("BB8832", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                new Track("CC8832", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+            };
+
+            List<Track> newAirspace = new List<Track>();
+
+            _uut.AirspaceUpdated += (o, args) =>
+            {
+                newAirspace = args.TracksInAirSpace;
+            };
+
+
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated
+                    += Raise.EventWith(this, new TrackArgs(track));
+            }
+
+            Assert.That(newAirspace.Count, Is.EqualTo(_testTracks.Length));
+        }
+
+        [Test]
+        public void OnTrackCreated_ResultsEnteringTrack_RightNumberOfEventsSent_IncludingAirspaceUpdated()
+        {
+            Track[] _testTracks = new Track[]
+            {
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                new Track("BB8832", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                new Track("CC8832", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+            };
+
+            int eventcounter = 0;
+
+            List<Track> newAirspace = new List<Track>();
+
+            _uut.EnteredTrack += (o, args) => { eventcounter++; };
+
+            _uut.AirspaceUpdated += (o, args) => { eventcounter++; };
+
+            
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated
+                    += Raise.EventWith(this, new TrackArgs(track));
+            }
+
+            Assert.That(eventcounter, Is.EqualTo(2 * _testTracks.Length));
+
+        }
+        #endregion
+
+        #region OnTrackCreated_ResultsUpdatedAirspace_Tests
+
+        [Test]
+        public void OnTrackCreated_ResultsUpdatedAirspace_BeginWithSigleTrackInAirSpacList_SinglTrackInListSentInUpdateEvent()
+        {
+
+           Track[] _testTracks = new Track[]
+           {
+               new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+               new Track("ATR423", new Position(14000, 14000), 14000, 0, 0, "20151006213456790")
+           };
+
+           
+            List<Track> newAirspace = new List<Track>();
+            
+            _uut.AirspaceUpdated += (o, args) =>{ newAirspace = args.TracksInAirSpace; };
+
+
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated
+                    += Raise.EventWith(this, new TrackArgs(track));
+            }
+            
+            Assert.That(newAirspace.Count, Is.EqualTo(1));
+            
+        }
+
+        [Test]
+        public void OnTrackCreated_ResultsUpdatedAirspace_BeginWithSigleTrackInAirSpacList_TrackInListHasUpdatedCourseAndVelocity()
+        {
+
+            Track[] _testTracks = new Track[]
+            {
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "20151006213456790")
+            };
+
+
+            fakeOpticsProvider_.GetTrackCourse(_testTracks[1], _testTracks[0]).Returns(90);
+            fakeOpticsProvider_.GetTrackVelocity(_testTracks[1], _testTracks[0]).Returns(2000);
+
+
+            List<Track> newAirspace = new List<Track>();
+
+            _uut.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
+
+
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated
+                    += Raise.EventWith(this, new TrackArgs(track));
+            }
+
+            Assert.That(newAirspace[0] != _testTracks[0]);
+            Assert.That(newAirspace[0].hori_velocity_, Is.EqualTo(2000));
+            Assert.That(newAirspace[0].course_, Is.EqualTo(90));
+        }
+
+        [Test]
+        public void OnTrackCreated_ResultsUpdatedAirspace_TracksAlreadyInAirSpacList_UpdatedTrackIsOnlyInListOnce()
+        {
+
+            Track[] _testTracks = new Track[]
+            {
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                new Track("BB423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "20151006213456790")
+            };
+
+
+            fakeOpticsProvider_.GetTrackCourse(Arg.Any<Track>(), Arg.Any<Track>()).ReturnsForAnyArgs(90);
+            fakeOpticsProvider_.GetTrackVelocity(Arg.Any<Track>(), Arg.Any<Track>()).ReturnsForAnyArgs(2000);
+
+
+            List<Track> newAirspace = new List<Track>();
+
+            _uut.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
+
+
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated
+                    += Raise.EventWith(this, new TrackArgs(track));
+            }
+
+            int trackCount = 0;
+
+            foreach (var track in newAirspace)
+            {
+                if (track.tag_ == _testTracks[_testTracks.Length -1].tag_)
+                {
+                    trackCount++;
+                }
+            }
+
+            Assert.That(trackCount, Is.EqualTo(1));
+        }
+
+        [Test]
+        public void OnTrackCreated_ResultsUpdatedAirspace_TracksAlreadyInAirSpacList_UpdatedTrackIsFirstInListSent()
+        {
+
+            Track[] _testTracks = new Track[]
+            {
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                new Track("BB423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "20151006213456790")
+            };
+
+
+            fakeOpticsProvider_.GetTrackCourse(Arg.Any<Track>(), Arg.Any<Track>()).ReturnsForAnyArgs(90);
+            fakeOpticsProvider_.GetTrackVelocity(Arg.Any<Track>(), Arg.Any<Track>()).ReturnsForAnyArgs(2000);
+
+
+            List<Track> newAirspace = new List<Track>();
+
+            _uut.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
+
+
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated
+                    += Raise.EventWith(this, new TrackArgs(track));
+            }
+
+           
+            Assert.That(newAirspace[0].tag_ == _testTracks[_testTracks.Length - 1].tag_, Is.EqualTo(true));
+        }
+
+        #endregion
+
+        #region OnTrackCreated_ResultsLeavingTrack_Tests
+
+        
+        [Test]
+        public void OnTrackCreated_ResultsTrackLeaving_BeginWithSigleTrackInAirSpacList_CorrectlyHandled()
         {
 
             Track[] _testTracks = new Track[]
@@ -125,7 +317,7 @@ namespace ATM_App2_UnitTest
             List<Track> newAirspace = new List<Track>();
 
 
-            _uut.EnteredTrack += (o, arg) => { LeavingTrack = arg.newTrack_; };
+            _uut.LeavingTrack += (o, arg) => { LeavingTrack = arg.newTrack_; };
 
             _uut.AirspaceUpdated += (o, args) =>
             {
@@ -149,10 +341,10 @@ namespace ATM_App2_UnitTest
             Assert.That(LeavingTrack.pos_ == _testTracks[1].pos_, Is.EqualTo(true));
 
 
-        } */
-
-
-    } 
+        }
+        
+        #endregion
+    }
 }
 
 
