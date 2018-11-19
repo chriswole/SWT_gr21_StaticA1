@@ -7,7 +7,7 @@ using ATM_App2.Classes;
 
 namespace ATM_App2.Interfaces
 {
-    interface IInAirSpace
+   public interface IInAirSpace
     {
         //event handlers
         void OnTrackCreated(object sender, TrackArgs args);
