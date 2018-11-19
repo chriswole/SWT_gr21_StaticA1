@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NUnit.Framework;
 using NSubstitute;
 using NUnit.Framework;
-using ATM_App2.Classes;
+using ATM_App2.Interfaces;
 
 namespace ATM_App2_UnitTest.UnitTestClasses
 {
@@ -14,22 +14,22 @@ namespace ATM_App2_UnitTest.UnitTestClasses
     //public class UnitTestInOutTrack
     //{
     //    private InOutTrack _uut;
-    //    private EnteredTrackArgs _enteredTrack;
-    //    private LeftTrackArgs _leftTrack;
-    //    private List<Track> _track1;
-    //    private List<Track> _track2;
+    //    private IInAirSpace fakeAirSpace_;
+       
 
 
     //    [SetUp]
     //    public void Setup()
     //    {
+    //        fakeAirSpace_ = Substitute.For<IInAirSpace>();
     //        _uut = new InOutTrack();
+    //        fakeAirSpace_.
 
     //    }
     //    [Test]
     //    public void TestMethod1()
     //    {
-            
+
     //    }
     //}
 }
