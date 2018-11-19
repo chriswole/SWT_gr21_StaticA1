@@ -23,7 +23,7 @@ namespace ATM_App2_UnitTest
 
         private ITrackFactory fakeTrackFactory_;
         private ITrackOpticsProvider fakeOpticsProvider_;
-        private InAirSpace _uut;
+        private InAirSpaceObserver _uut;
         
         [SetUp]
         [Author("Kasper Andersen")]
@@ -34,7 +34,7 @@ namespace ATM_App2_UnitTest
             fakeTrackFactory_ = Substitute.For<ITrackFactory>();
 
             // Inject the fake TDR
-            _uut = new InAirSpace(fakeOpticsProvider_);
+            _uut = new InAirSpaceObserver(fakeOpticsProvider_);
 
             fakeTrackFactory_.TrackCreated += _uut.OnTrackCreated;
 

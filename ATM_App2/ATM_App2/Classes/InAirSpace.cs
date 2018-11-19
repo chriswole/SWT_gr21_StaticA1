@@ -10,14 +10,14 @@ using ATM_App2.Interfaces;
 namespace ATM_App2.Classes
 {
     
-    public class InAirSpace : IInAirSpace
+    public class InAirSpaceObserver : IInAirSpaceObserver
     {
         //event handlers
-        public EventHandler<AirspaceTrackArgs> AirspaceUpdated;
-        public EventHandler<TrackArgs> EnteredTrack;
-        public EventHandler<TrackArgs> LeavingTrack;
+        public event EventHandler<AirspaceTrackArgs> AirspaceUpdated;
+        public event EventHandler<TrackArgs> EnteredTrack;
+        public event EventHandler<TrackArgs> LeavingTrack;
 
-        public InAirSpace(ITrackOpticsProvider opticsProvider)
+        public InAirSpaceObserver(ITrackOpticsProvider opticsProvider)
         {
             opticsProvider_ = opticsProvider;
             TracksInAirspace_ = new List<Track>();
