@@ -65,6 +65,7 @@ namespace ATM_App2.Classes
             TimerListIn.Remove(TimerListIn[0]);
             ListIn.Remove(ListIn[0]);
             OnListInUpdated(ListIn);
+            //der er noget her der ikke virker
         }
         public void TimeElapsedOut(object sender, EventArgs e)
         {

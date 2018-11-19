@@ -73,6 +73,7 @@
     <Compile Include="Interfaces\ILogToFile.cs" />
     <Compile Include="Interfaces\ISeperation.cs" />
     <Compile Include="Interfaces\IStringParser.cs" />
+    <Compile Include="Interfaces\ITimekeeper.cs" />
     <Compile Include="Interfaces\ITrackFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
