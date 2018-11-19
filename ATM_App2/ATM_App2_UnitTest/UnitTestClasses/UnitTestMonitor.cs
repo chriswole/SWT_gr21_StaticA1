@@ -1,44 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using NUnit.Framework;
 using ATM_App2.Classes;
 using ATM_App2.Interfaces;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
-using NSubstitute.ReturnsExtensions;
+using NUnit.Framework;
+using NUnit.Framework.Constraints;
+using TransponderReceiver;
+using Assert = NUnit.Framework.Assert;
+
 
 namespace ATM_App2_UnitTest.UnitTestClasses
 {
-    /*
+    
+    [TestClass]
     class UnitTestMonitor
     {
-        
 
         private Monitor _uut;
         private IInAirSpaceObserver fakeAirSpace_;
-        private ITrackOpticsProvider fakeOpticsProvider_;
-
 
         [SetUp]
-        public void setup()
+        public void Setup()
         {
-            fakeOpticsProvider_ = Substitute.For<ITrackOpticsProvider>();
+            fakeAirSpace_ = Substitute.For<IInAirSpaceObserver>();
+            _uut = new Monitor();
 
-            _uut = Substitute.For<ITrackFactory>();
 
-            
-            _uut = new InAirSpaceObserver(fakeOpticsProvider_);
 
-            fakeTrackFactory_.TrackCreated += _uut.OnTrackCreated;
         }
 
         [Test]
-        public void initMonitorRecieveData()
+        public void MonitorErrorOnNull()
         {
-            Assert.IsNull(_uut);
+            List<Monitor> airspaceMonitored = new List<Monitor>();
+            List<Monitor> updatedAirspaceMonitored = new List<Monitor>();
+
+            Assert.IsEmpty(airspaceMonitored);
         }
-        
-    }*/
+        [Test]
+        public void ExtendingMonitoredUnits()
+        {
+
+            List<Monitor> airspaceMonitored = new List<Monitor>();
+            List<Monitor> updatedAirspaceMonitored = new List<Monitor>();
+           
+
+            airspaceMonitored.Add(new Monitor());
+            
+            updatedAirspaceMonitored.AddRange(airspaceMonitored);
+            updatedAirspaceMonitored.ForEach(Console.WriteLine);
+
+            Assert.That(updatedAirspaceMonitored.Any( x => airspaceMonitored.Any(y => x.Equals(y))));
+        }
+
+    }
+
+
+
 }

@@ -22,18 +22,22 @@ namespace ATM_App2.Classes
         public void InitMonitor()
         {
             List<Monitor> airspaceMonitored = new List<Monitor>();
+            List<Monitor> updatedAirspaceMonitored = new List<Monitor>();
 
-            if (airspaceMonitored != null)
+            if (airspaceMonitored.Count==0)
             {
-               airspaceMonitored.ForEach(Console.WriteLine);
+                Console.WriteLine("There is currently no planes in the airspace");
             }
 
             else
             {
-                Console.WriteLine("There are currently no planes in the airspace\n");
-            }
+                
+                updatedAirspaceMonitored.AddRange(airspaceMonitored);
+                airspaceMonitored.Clear();
+                updatedAirspaceMonitored.ForEach(Console.WriteLine);
 
-            //Console.WriteLine(true);
+            }
+            
 
         }
 
@@ -57,16 +61,25 @@ namespace ATM_App2.Classes
         }
 
         
-        private void OnEntered(object sender, EnteredTrackArgs e)
+        private void OnEntered(object sender, EnteredTrackArgs e) 
         {
+            List<Monitor> enterList = new List<Monitor>();
             //Listing planes entering airspace
             Console.WriteLine("{0} has entered til airspace", e.listEntered);
+            //enterList.Add(listEntered);
+            //airspaceMonitored.AddRange(enterList);
+            //enterList.Clear();
+
         }
 
         private void OnDeleted(object sender, LeftTrackArgs e)
         {
+            List<Monitor> leavingList = new List<Monitor>();
             //Listing planes leaving airspace
             Console.WriteLine("{0} has left the airspace", e.listLeft);
+            //leavingList.Add(listLeft);
+            //airspaceMonitored.AddRange(leavingList);
+            //leavingList.Clear();
         }
 
         private void OnNewDanger(object sender, DangerlistArgs e)
