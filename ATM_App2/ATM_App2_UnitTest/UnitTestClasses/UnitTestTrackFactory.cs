@@ -74,7 +74,7 @@ namespace ATM_App2_UnitTest
             Track compareTrack = new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789");
 
             Track track = new Track();
-            _uut.TrackCreated += (o, arg) => { track = arg.Track; };
+            _uut.TrackCreated += (o, arg) => { track = arg.newTrack_; };
 
             // Act: Trigger the fake object to execute event invocation
             _fakeTransponderReceiver.TransponderDataReady
