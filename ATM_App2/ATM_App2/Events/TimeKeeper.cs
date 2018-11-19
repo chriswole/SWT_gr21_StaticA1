@@ -12,7 +12,8 @@ namespace ATM_App2.Events
 {
     public class TimeKeeper:ITimekeeper
     {
-        public EventHandler TimeElapsedIn;
+        public EventHandler TimeElapsedIn;//Skal den ikke handle noget??<>??
+
         public EventHandler TimerElapsedOut;
         static System.Windows.Forms.Timer timer1 =new System.Windows.Forms.Timer();
 
@@ -21,13 +22,14 @@ namespace ATM_App2.Events
         {
             timer1.Interval = 5000; // 5 second
             timer1.Enabled = true;
-            timer1.Tick += new EventHandler(TimeElapsedIn);
+            timer1.Tick += TimeElapsedIn;//Det er her det fucker, den siger noget med at være null
+            
         }
         public void startTimerOut()
         {
             timer1.Interval = 5000; // 5 second
             timer1.Enabled = true;
-            timer1.Tick += new EventHandler(TimerElapsedOut);
+            timer1.Tick += TimerElapsedOut;
         }
 
         public void stopTimer()

@@ -10,7 +10,7 @@ namespace ATM_App2.Interfaces
     public interface IInAirSpaceObserver
     {
         event EventHandler<AirspaceTrackArgs> AirspaceUpdated;
-        event  EventHandler<TrackArgs> EnteredTrack;
+        event EventHandler<TrackArgs> EnteredTrack;
         event EventHandler<TrackArgs> LeavingTrack;
     }
 }
