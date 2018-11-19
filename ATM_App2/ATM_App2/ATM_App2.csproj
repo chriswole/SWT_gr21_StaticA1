@@ -53,7 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\InAirSpace.cs" />
+    <Compile Include="Classes\InAirSpaceObserver.cs" />
     <Compile Include="Classes\EventArgs.cs" />
     <Compile Include="Classes\InOutTrack.cs" />
     <Compile Include="Classes\Monitor.cs" />
@@ -69,7 +69,7 @@
     <Compile Include="Classes\Position.cs" />
     <Compile Include="Classes\Danger.cs" />
     <Compile Include="Events\TrackLeftAirspace.cs" />
-    <Compile Include="Interfaces\IInAirSpace.cs" />
+    <Compile Include="Interfaces\IInAirSpaceObserver.cs" />
     <Compile Include="Interfaces\ILogToFile.cs" />
     <Compile Include="Interfaces\ISeperation.cs" />
     <Compile Include="Interfaces\IStringParser.cs" />
