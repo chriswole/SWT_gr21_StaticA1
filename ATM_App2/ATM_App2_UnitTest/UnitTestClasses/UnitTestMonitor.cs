@@ -5,28 +5,40 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 using ATM_App2.Classes;
+using ATM_App2.Interfaces;
 using NSubstitute;
 using NSubstitute.ReturnsExtensions;
 
 namespace ATM_App2_UnitTest.UnitTestClasses
 {
-    
+    /*
     class UnitTestMonitor
     {
-        public Monitor uut;
+        
+
+        private Monitor _uut;
+        private IInAirSpaceObserver fakeAirSpace_;
+        private ITrackOpticsProvider fakeOpticsProvider_;
 
 
         [SetUp]
         public void setup()
         {
-            List<Monitor> uut = new List<Monitor>();
-            uut.Add(null);
+            fakeOpticsProvider_ = Substitute.For<ITrackOpticsProvider>();
+
+            _uut = Substitute.For<ITrackFactory>();
+
+            
+            _uut = new InAirSpaceObserver(fakeOpticsProvider_);
+
+            fakeTrackFactory_.TrackCreated += _uut.OnTrackCreated;
         }
 
         [Test]
         public void initMonitorRecieveData()
         {
-            Assert.IsNull(uut);
+            Assert.IsNull(_uut);
         }
-    }
+        
+    }*/
 }
