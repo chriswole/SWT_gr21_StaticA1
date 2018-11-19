@@ -14,7 +14,7 @@ namespace ATM_App2.Classes
     public class Monitor 
     {
         //Constructor
-        public Monitor(string test_)
+        public Monitor()
         {
 
         }
@@ -25,7 +25,7 @@ namespace ATM_App2.Classes
 
             if (airspaceMonitored != null)
             {
-                airspaceMonitored.ForEach(Console.WriteLine);
+               airspaceMonitored.ForEach(Console.WriteLine);
             }
 
             else
@@ -33,7 +33,7 @@ namespace ATM_App2.Classes
                 Console.WriteLine("There are currently no planes in the airspace\n");
             }
 
-            Console.WriteLine(true);
+            //Console.WriteLine(true);
 
         }
 

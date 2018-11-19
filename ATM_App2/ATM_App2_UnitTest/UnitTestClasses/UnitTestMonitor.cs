@@ -10,7 +10,7 @@ using NSubstitute.ReturnsExtensions;
 
 namespace ATM_App2_UnitTest.UnitTestClasses
 {
-    /*
+    
     class UnitTestMonitor
     {
         public Monitor uut;
@@ -28,5 +28,5 @@ namespace ATM_App2_UnitTest.UnitTestClasses
         {
             Assert.IsNull(uut);
         }
-    }*/
+    }
 }
