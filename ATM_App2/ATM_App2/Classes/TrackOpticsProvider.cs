@@ -15,7 +15,7 @@ namespace ATM_App2.Classes
         double GetDistanceBetweenTracks(Track firsTrack, Track secondTrack);
         double GetTrackVelocity(Track activeTrack, Track passiveTrack);
         double GetTrackCourse(Track activeTrack, Track passTrack);
-        List<Danger> RemoveOldDangers(Track newTrack, List<Danger> dangerList);
+       
 
     }
 
