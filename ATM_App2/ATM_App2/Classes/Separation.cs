@@ -17,7 +17,7 @@ namespace ATM_App2.Classes
     }
 
  
-        public class Separation //: ISeparation
+        public class Separation : ISeparation
         {
             private List<Danger> Dangers_ { get; set; }
             private ITrackOpticsProvider opticsProvider_;
@@ -25,7 +25,7 @@ namespace ATM_App2.Classes
 
 
             // Eventhandler to subscribe on
-            public EventHandler<DangerlistArgs> DangerListUpdated;
+            public event EventHandler<DangerlistArgs> DangerListUpdated;
             public void OnAirspaceUpdated(object sender, AirspaceTrackArgs argList)
             {
                 CalculateDistances(argList.TracksInAirSpace);
@@ -46,7 +46,7 @@ namespace ATM_App2.Classes
                 var newTrack = trackList[0];
                 if (Dangers_.Count!=0)
                 {
-                    Dangers_ = opticsProvider_.RemoveOldDangers(newTrack, Dangers_);
+                    Dangers_ = RemoveOldDangers(newTrack, Dangers_);
                 }
                
                 foreach (var track1 in trackList)
@@ -70,12 +70,15 @@ namespace ATM_App2.Classes
                                     if (dangerObj.track1_ == dangerObject.track1_ && dangerObj.track2_ == dangerObject.track2_)
                                     {
                                         Dangers_[i] = dangerObj;
-                                    }
+                                        // lav Danger list updated event her. 
+                                        OnDangerListUpdated(Dangers_);
+                                }
                                     else
                                     {
                                         Dangers_.Add(dangerObj);
-
-                                    }
+                                        // lav Danger list updated event her. 
+                                        OnDangerListUpdated(Dangers_);
+                                }
 
                                     i++;
                                 }
@@ -83,14 +86,61 @@ namespace ATM_App2.Classes
                             }
                         }
                     }
-                    // lav Danger list updated event her. 
-                    OnDangerListUpdated(Dangers_);
+                   
                     
                 }
             }
-            
-            
-            protected virtual void OnDangerListUpdated(List<Danger> dangers)
+
+
+        public List<Danger> RemoveOldDangers(Track newTrack, List<Danger> dangerList)
+        {
+            bool changedList = false;
+
+            foreach (var dan in dangerList)
+            {   // if changed track is track1_
+                if (newTrack.tag_ == dan.track1_.tag_)
+                {
+                    // Are the planes within same altitude layer
+                    int alt = Math.Abs(newTrack.altitude_ - dan.track1_.altitude_);
+                    if (alt > 300)
+                    {
+                        // are the planes too close in xy-plane
+                        Position dist = newTrack.pos_ - dan.track1_.pos_;
+                        var distance = Math.Sqrt((dist.x_ * dist.x_) + (dist.y_ * dist.y_));
+                        if (distance > 5000)
+                        {
+                            // remove danger from list, since it is not danger anymore
+                            dangerList.Remove(dan);
+                            changedList = true;
+                        }
+                    }
+                }
+                else if (newTrack.tag_ == dan.track2_.tag_)
+                {   // if changed track is track2_
+                    int alt = Math.Abs(newTrack.altitude_ - dan.track2_.altitude_);
+                    if (alt > 300)
+                    {
+                        // are the planes too close in xy-plane
+                        Position dist = newTrack.pos_ - dan.track2_.pos_;
+                        var distance = Math.Sqrt((dist.x_ * dist.x_) + (dist.y_ * dist.y_));
+                        if (distance > 5000)
+                        {
+                            // remove danger from list, since it is not danger anymore
+                            dangerList.Remove(dan);
+                            changedList = true;
+                        }
+                    }
+                }
+            }
+
+            if (changedList)
+            {
+                OnDangerListUpdated(dangerList);
+            }
+            return dangerList;
+        }
+
+        protected virtual void OnDangerListUpdated(List<Danger> dangers)
             {
                 if (DangerListUpdated != null)
                 {
