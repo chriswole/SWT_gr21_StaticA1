@@ -9,11 +9,8 @@ namespace ATM_App2.Interfaces
 {
     public interface ISeperation
     {
-        List<Danger> newDangers_ { get; set; }
-        List<Danger> oldDangers_ { get; set; }
-
-        void calculateDistances(List<Track> tracklist);
-        void raiseAlarm();
-        void deactivateAlarm();
+        event EventHandler<DangerlistArgs> DangerListUpdated;
+        void CalculateDistances(List<Track> trackList);
+ 
     }
 }
