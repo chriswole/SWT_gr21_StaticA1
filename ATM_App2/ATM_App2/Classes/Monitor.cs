@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ATM_App2.Classes;
 using ATM_App2.Events;
+using ATM_App2.Interfaces;
 
 namespace ATM_App2.Classes
 {
@@ -43,7 +44,7 @@ namespace ATM_App2.Classes
 
         }
 
-        public void UpdateMonitor()
+        public void UpdateMonitor(ISeperation monitoring)
         {
 
             //Subscribing to planes entering the airspace
@@ -56,7 +57,6 @@ namespace ATM_App2.Classes
 
 
             //Subscribing to Separation events
-            Separation monitoring = new Separation(new LogToFile(), new TrackOpticsProvider());
             monitoring.DangerListUpdated += new EventHandler<DangerlistArgs>(OnNewDanger);
             
 
