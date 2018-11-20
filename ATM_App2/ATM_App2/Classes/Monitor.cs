@@ -44,7 +44,7 @@ namespace ATM_App2.Classes
 
         }
 
-        public void UpdateMonitor(ISeperation monitoring)
+        public void UpdateMonitor(ISeparation monitoring)
         {
 
             //Subscribing to planes entering the airspace

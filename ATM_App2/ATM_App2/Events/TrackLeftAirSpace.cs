@@ -18,14 +18,19 @@ namespace ATM_App2.Events
             _atmLog = atmLogEvent ?? new LogToFile();
         }
 
-        public override void DetectNotification(Collection<Track> oldTransponderDatas, Collection<Track> newTransponderDatas)
+        //public override void DetectNotification(Collection<Track> oldTransponderDatas, Collection<Track> newTransponderDatas)
+        //{
+        //    foreach (var item in oldTransponderDatas.Where(item => newTransponderDatas.All(t => t.tag_ != item.tag_)))
+        //    {
+        //        const string logString = " TrackLeftAirspace Notification ";
+        //        Notify(new NotificationEventArgs(item.tag_, "TrackLeftAirspace", item.timestamp_));
+        //        _atmLog.Log(item.timestamp_ + logString + item.tag_);
+        //    }
+        //}
+        public void OnEnteredTrack(object sender, TrackArgs totrack)
         {
-            foreach (var item in oldTransponderDatas.Where(item => newTransponderDatas.All(t => t.tag_ != item.tag_)))
-            {
-                const string logString = " TrackLeftAirspace Notification ";
-                Notify(new NotificationEventArgs(item.tag_, "TrackLeftAirspace", item.timestamp_));
-                _atmLog.Log(item.timestamp_ + logString + item.tag_);
-            }
+            Notify(new NotificationEventArgs(totrack.newTrack_.tag_, "TrackEnteredAirspace", totrack.newTrack_.timestamp_));
+            _atmLog.Log(totrack.newTrack_.timestamp_ + totrack.newTrack_.tag_ + " left");
         }
     }
 }

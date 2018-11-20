@@ -12,7 +12,7 @@ namespace ATM_App2.Events
     {
         public static event EventHandler<NotificationEventArgs> NotificationEvent;
 
-        abstract public void DetectNotification(Collection<Track> oldTransponderDatas, Collection<Track> newTransponderDatas);
+        //abstract public void DetectNotification(Collection<Track> oldTransponderDatas, Collection<Track> newTransponderDatas);
 
         protected virtual void Notify(NotificationEventArgs e)
         {
