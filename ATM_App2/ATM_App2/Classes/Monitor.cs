@@ -26,14 +26,16 @@ namespace ATM_App2.Classes
 
             if (airspaceMonitored.Count==0)
             {
-                Console.WriteLine("There is currently no planes in the airspace");
+                Console.WriteLine("There are currently no planes in the airspace");
             }
 
             else
             {
-                
+                //Adds the airspaceMonitored list to the updatedAirspaceMonitored list
                 updatedAirspaceMonitored.AddRange(airspaceMonitored);
+                //Clears airspaceMonitored list
                 airspaceMonitored.Clear();
+                //Writes out the planes in the airspace monitored in console
                 updatedAirspaceMonitored.ForEach(Console.WriteLine);
 
             }
@@ -54,7 +56,7 @@ namespace ATM_App2.Classes
 
 
             //Subscribing to Separation events
-            Separation monitoring = new Separation(new LogToFile());
+            Separation monitoring = new Separation(new LogToFile(), new TrackOpticsProvider());
             monitoring.DangerListUpdated += new EventHandler<DangerlistArgs>(OnNewDanger);
             
 
@@ -84,7 +86,7 @@ namespace ATM_App2.Classes
 
         private void OnNewDanger(object sender, DangerlistArgs e)
         {
-            //Listing available dangers
+            //Listing active dangers
             Console.WriteLine("{0} are too close!", e.DangerList_);
         }
     }
