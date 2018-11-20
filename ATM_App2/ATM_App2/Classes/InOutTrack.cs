@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ATM_App2.Events;
+using ATM_App2.Interfaces;
 
 namespace ATM_App2.Classes
 {
@@ -15,14 +16,14 @@ namespace ATM_App2.Classes
     {
         public List<Track> listLeft { get; set; }
     }
-    public class InOutTrack
+    public class InOutTrack:IInOutTrack
     {
         private List<Track> ListIn;
         private List<Track> ListOut;
         private List<TimeKeeper> TimerListIn;
         private List<TimeKeeper> TimerListOut;
-        public EventHandler<EnteredTrackArgs> listInUpdated;
-        public EventHandler<LeftTrackArgs> listOutUpdated;
+        public event EventHandler<EnteredTrackArgs> listInUpdated;
+        public event EventHandler<LeftTrackArgs> listOutUpdated;
 
         public InOutTrack()
         {

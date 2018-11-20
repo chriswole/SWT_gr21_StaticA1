@@ -16,21 +16,27 @@ namespace ATM_App2.Events
     public class TrackEnteredAirspace : ATMNotification
     {
         private readonly ILogToFile _atmLog;
-
+        public EventHandler<EnteredTrackArgs> listInUpdated;
 
         public TrackEnteredAirspace(ILogToFile atmLogEvent = null)
         {
             _atmLog = atmLogEvent ?? new LogToFile();
         }
 
-        public override void DetectNotification(Collection<Track> oldTransponderDatas, Collection<Track> newTransponderDatas)
+        //public override void DetectNotification(Collection<Track> oldTransponderDatas, Collection<Track> newTransponderDatas)
+        //{
+        //    foreach (var item in newTransponderDatas.Where(item => oldTransponderDatas.All(t => t.tag_ != item.tag_)))
+        //    {
+        //        const string logString = " TrackEnteredAirspace Notification ";
+        //        Notify(new NotificationEventArgs(item.tag_, "TrackEnteredAirspace", item.timestamp_));
+        //        _atmLog.Log(item.timestamp_ + logString + item.tag_);
+        //    }
+        //}
+
+        public void OnEnteredTrack(object sender, TrackArgs totrack)
         {
-            foreach (var item in newTransponderDatas.Where(item => oldTransponderDatas.All(t => t.tag_ != item.tag_)))
-            {
-                const string logString = " TrackEnteredAirspace Notification ";
-                Notify(new NotificationEventArgs(item.tag_, "TrackEnteredAirspace", item.timestamp_));
-                _atmLog.Log(item.timestamp_ + logString + item.tag_);
-            }
+            Notify(new NotificationEventArgs(totrack.newTrack_.tag_, "TrackEnteredAirspace", totrack.newTrack_.timestamp_));
+            _atmLog.Log(totrack.newTrack_.timestamp_ + totrack.newTrack_.tag_ + " entereed"); 
         }
     }
 }
