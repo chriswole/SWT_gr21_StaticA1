@@ -68,13 +68,14 @@ namespace ATM_App2.Classes
                                 Danger dangerObj = new Danger(newTrack, track1, (int) distance);
                                 foreach (var dangerObject in Dangers_)
                                 {
-                                    if (dangerObj.track1_ == dangerObject.track1_ && dangerObj.track2_ == dangerObject.track2_ || 
-                                        dangerObj.track2_ == dangerObject.track1_ && dangerObj.track1_ == dangerObject.track2_)
+                                    if (dangerObj.track1_.tag_ == dangerObject.track1_.tag_ && dangerObj.track2_.tag_ == dangerObject.track2_.tag_ || 
+                                        dangerObj.track1_.tag_ == dangerObject.track2_.tag_ && dangerObj.track2_.tag_ == dangerObject.track1_.tag_)
                                     {
                                         Dangers_[i] = dangerObj;
                                         dangerNotReplaced = false;
                                         // lav Danger list updated event her. 
                                         OnDangerListUpdated(Dangers_);
+                                        break;
                                     }
                                     
                                     i++;

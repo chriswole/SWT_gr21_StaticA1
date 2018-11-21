@@ -22,15 +22,16 @@ namespace ATM_App2.Classes
         public int altDistance_ { get; private set; }
         // the print function for Danger
         // the altitude is per definition less than 300, otherwise danger isn't created. 
-        //public void print()
-        //{
-        //    Console.Write(track1_.tag_);
-        //    Console.Write(" and ");
-        //    Console.Write(track2_.tag_);
-        //    Console.Write(" Distance: ");
-        //    Console.WriteLine(distance_);
+       /* public void print()
+        {
+            Console.Write(track1_.tag_);
+            Console.Write(" and ");
+            Console.Write(track2_.tag_);
+            Console.Write(" Distance: ");
+            Console.WriteLine(distance_);
 
-        //}
+        }*/
+
         public static bool operator ==(Danger danger1, Danger danger2)
         {
             // Same Danger no matter the order of tracks

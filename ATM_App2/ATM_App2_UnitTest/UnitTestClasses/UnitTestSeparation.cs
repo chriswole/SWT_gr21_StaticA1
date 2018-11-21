@@ -221,6 +221,51 @@ namespace ATM_App2_UnitTest
 
         }
 
+        [Test]
+        public void OnAirSpaceUpdated_make2Danger_update1Danger()
+        {
+            //Arrange
+            List<Danger> Dangerlist = new List<Danger>();
+            List<Track> trackList = new List<Track>();
+            Track track1 = new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520412");
+            Track track2 = new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "20180304124520412");
+            Track track3 = new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520412");
+            Track track8 = new Track("HSAN329", new Position(24500, 11000), 700, 0, 0, "20180304124520412");
+
+            int eventCounter = 0;
+
+            // Lambda expression, what happens at event in test.
+            uut_.DangerListUpdated += (o, args) =>
+            {
+                eventCounter++;
+                Dangerlist = args.DangerList_;
+            };
+
+
+
+            trackList.Insert(0, track1);
+            trackList.Insert(0, track2);
+
+
+            //Act 
+            //Need to raise event after each Track added, to make certain all tracks have been compared.
+            fakeInAirSpaceObserver_.AirspaceUpdated += Raise.EventWith(this, new AirspaceTrackArgs(trackList));
+            trackList.Insert(0, track3);
+            fakeInAirSpaceObserver_.AirspaceUpdated += Raise.EventWith(this, new AirspaceTrackArgs(trackList));
+            trackList.Insert(0, track8);
+            trackList.Remove(track1);// replaced by track 8 
+            fakeInAirSpaceObserver_.AirspaceUpdated += Raise.EventWith(this, new AirspaceTrackArgs(trackList));
+
+            //Assert
+            Assert.That(eventCounter, Is.EqualTo(2));
+
+            Assert.That(Dangerlist.Count, Is.EqualTo(1));
+
+
+        }
+
+
+
         #endregion
 
         #region RemoveDangerTests
