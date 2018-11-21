@@ -24,8 +24,9 @@ namespace ATM_App2.Classes
         public double GetDistanceBetweenTracks(Track firsTrack, Track secondTrack)
         {
             
-            var dist = firsTrack.pos_ - secondTrack.pos_;
+            var dist = secondTrack.pos_ - firsTrack.pos_;
             var distance = Math.Sqrt((dist.x_ * dist.x_) + (dist.y_ * dist.y_));
+            if (distance > 0) distance  *= -1.0;
 
             return distance;
         }
@@ -44,17 +45,40 @@ namespace ATM_App2.Classes
 
         public double GetTrackCourse(Track activeTrack, Track passiveTrack)
         {
+            double deltaX = activeTrack.pos_.x_ - passiveTrack.pos_.x_;
+            double deltaY = activeTrack.pos_.y_ - passiveTrack.pos_.y_;
+            double course = Math.Atan2(deltaX, deltaY) * (180.0 /Math.PI);
+
+            if (course < 0)
+                course += 360.0;
+            
+
+            return course;
+            /*
+            double course = Math.Atan2(activeTrack.pos_.y_ - passiveTrack.pos_.y_, activeTrack.pos_.x_ - passiveTrack.pos_.x_);
+
+            if (course < 0)
+            {
+                course += 360;
+            }
+
+            course += 90.0;
+
+
+           //(e = course;
+
+            /*
             var angle = Math.Atan2(activeTrack.pos_.y_, activeTrack.pos_.x_) -
                         Math.Atan2(passiveTrack.pos_.y_, passiveTrack.pos_.x_);
 
             angle = angle * 360.0 / (2 * Math.PI);
-            //if (angle < 0)
-            //{
-            //    angle = angle + 360.0;
-            //}
-            angle = ((angle % 360) + 360) % 360;
+            if (angle < 0)
+            {
+                angle = angle + 360.0;
+            }
+           // angle = ((angle % 360) + 360) % 360; */
 
-            return angle;
+            //return course;
         }
 
         private double GetSecondsBetweenTimeStamps(string oldTimeStamp, string newTimeStamp)
