@@ -170,6 +170,7 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
                 "ATR423;12000;12000;14000;2015100621345600",
                 "ATR423;14000;14000;14000;2015100621345700"
             };
+
            List<Track> newAirspace = new List<Track>();
 
             inAirSpaceObserver_.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
@@ -182,38 +183,37 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
         }
 
-/*       [Test]
+       [Test]
         public void OnTrackCreated_ResultsUpdatedAirspace_BeginWithSigleTrackInAirSpacList_TrackInListHasUpdatedCourseAndVelocity()
         {
 
             Track[] _testTracks = new Track[]
             {
-                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
-                new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "20151006213456790")
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "2015100621345600"),
+                new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "2015100621345700")
             };
 
+            List<string> testData_ = new List<string>()
+            {
+                "ATR423;12000;12000;14000;2015100621345600",
+                "ATR423;14000;12000;14000;2015100621345700"
+            };
 
-            fakeOpticsProvider_.GetTrackCourse(_testTracks[1], _testTracks[0]).Returns(90);
-            fakeOpticsProvider_.GetTrackVelocity(_testTracks[1], _testTracks[0]).Returns(2000);
-
-
+           
             List<Track> newAirspace = new List<Track>();
 
-            _uut.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
+            inAirSpaceObserver_.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
 
 
-            foreach (var track in _testTracks)
-            {
-                fakeTrackFactory_.TrackCreated
-                    += Raise.EventWith(this, new TrackArgs(track));
-            }
+            receiver_.TransponderDataReady
+                += Raise.EventWith(this, new RawTransponderDataEventArgs(testData_));
 
             Assert.That(newAirspace[0] != _testTracks[0]);
             Assert.That(newAirspace[0].hori_velocity_, Is.EqualTo(2000));
             Assert.That(newAirspace[0].course_, Is.EqualTo(90));
         }
 
-        [Test]
+    /*    [Test]
         public void OnTrackCreated_ResultsUpdatedAirspace_TracksAlreadyInAirSpacList_UpdatedTrackIsOnlyInListOnce()
         {
 
