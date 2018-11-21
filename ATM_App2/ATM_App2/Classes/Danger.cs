@@ -33,9 +33,9 @@ namespace ATM_App2.Classes
         //}
         public static bool operator ==(Danger danger1, Danger danger2)
         {
-
-            if (danger1.track1_.tag_ == danger2.track1_.tag_ &&
-                danger1.track2_ == danger2.track2_ &&
+            // Same Danger no matter the order of tracks
+            if ((danger1.track1_.tag_ == danger2.track1_.tag_|| danger1.track1_.tag_==danger2.track2_.tag_) &&
+                (danger1.track2_ == danger2.track2_ || danger1.track2_.tag_== danger2.track1_.tag_ )&&
                 danger1.distance_ == danger2.distance_)
                 return true;
             else
@@ -48,8 +48,8 @@ namespace ATM_App2.Classes
         public static bool operator !=(Danger danger1, Danger danger2)
         {
 
-            if (danger1.track1_ != danger2.track1_ ||
-                danger1.track2_ != danger2.track2_ ||
+            if ((danger1.track1_ != danger2.track1_ && danger1.track1_!=danger2.track2_)||
+                (danger1.track2_ != danger2.track2_ && danger1.track2_ != danger2.track1_)||
                 danger1.distance_ != danger2.distance_)
                 return true;
             else
