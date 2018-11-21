@@ -158,7 +158,7 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
         }
        #endregion
 
-      // #region OnTrackCreated_ResultsUpdatedAirspace_Tests
+       #region OnTrackCreated_ResultsUpdatedAirspace_Tests
         
         
         [Test]
@@ -213,32 +213,31 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             Assert.That(newAirspace[0].course_, Is.EqualTo(90));
         }
 
-    /*    [Test]
+        
+       [Test]
         public void OnTrackCreated_ResultsUpdatedAirspace_TracksAlreadyInAirSpacList_UpdatedTrackIsOnlyInListOnce()
         {
 
             Track[] _testTracks = new Track[]
             {
-                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
-                new Track("BB423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
-                new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "20151006213456790")
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "2015100621345600"),
+                new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "2015100621345700")
             };
 
-
-            fakeOpticsProvider_.GetTrackCourse(Arg.Any<Track>(), Arg.Any<Track>()).ReturnsForAnyArgs(90);
-            fakeOpticsProvider_.GetTrackVelocity(Arg.Any<Track>(), Arg.Any<Track>()).ReturnsForAnyArgs(2000);
+            List<string> testData_ = new List<string>()
+            {
+                "ATR423;12000;12000;14000;2015100621345600",
+                "ATR423;14000;12000;14000;2015100621345700"
+            };
 
 
             List<Track> newAirspace = new List<Track>();
 
-            _uut.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
+            inAirSpaceObserver_.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
 
+            receiver_.TransponderDataReady
+                += Raise.EventWith(this, new RawTransponderDataEventArgs(testData_));
 
-            foreach (var track in _testTracks)
-            {
-                fakeTrackFactory_.TrackCreated
-                    += Raise.EventWith(this, new TrackArgs(track));
-            }
 
             int trackCount = 0;
 
@@ -253,7 +252,7 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             Assert.That(trackCount, Is.EqualTo(1));
         }
 
-        [Test]
+       [Test]
         public void OnTrackCreated_ResultsUpdatedAirspace_TracksAlreadyInAirSpacList_UpdatedTrackIsFirstInListSent()
         {
 
@@ -264,21 +263,20 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
                 new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "20151006213456790")
             };
 
-
-            fakeOpticsProvider_.GetTrackCourse(Arg.Any<Track>(), Arg.Any<Track>()).ReturnsForAnyArgs(90);
-            fakeOpticsProvider_.GetTrackVelocity(Arg.Any<Track>(), Arg.Any<Track>()).ReturnsForAnyArgs(2000);
-
-
-            List<Track> newAirspace = new List<Track>();
-
-            _uut.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
-
-
-            foreach (var track in _testTracks)
+            List<string> testData_ = new List<string>()
             {
-                fakeTrackFactory_.TrackCreated
-                    += Raise.EventWith(this, new TrackArgs(track));
-            }
+                "ATR423;12000;12000;14000;2015100621345600",
+                "BB423;12000;12000;14000;20151006213456700",
+                "ATR423;14000;12000;14000;2015100621345700"
+            };
+
+           List<Track> newAirspace = new List<Track>();
+
+            inAirSpaceObserver_.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
+
+
+            receiver_.TransponderDataReady
+                += Raise.EventWith(this, new RawTransponderDataEventArgs(testData_));
 
 
             Assert.That(newAirspace[0].tag_ == _testTracks[_testTracks.Length - 1].tag_, Is.EqualTo(true));
@@ -288,7 +286,7 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
         #region OnTrackCreated_ResultsLeavingTrack_Tests
 
-
+        /*
         [Test]
         public void OnTrackCreated_ResultsTrackLeaving_BeginWithSigleTrackInAirSpacList_CorrectlyHandled()
         {
@@ -329,8 +327,8 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             Assert.That(LeavingTrack.pos_ == _testTracks[1].pos_, Is.EqualTo(true));
 
 
-        }
+        }*/
 
-        #endregion */
+        #endregion 
     } 
 }

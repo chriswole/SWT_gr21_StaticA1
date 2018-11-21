@@ -26,7 +26,7 @@ namespace ATM_App2.Classes
             
             var dist = secondTrack.pos_ - firsTrack.pos_;
             var distance = Math.Sqrt((dist.x_ * dist.x_) + (dist.y_ * dist.y_));
-            if (distance > 0) distance  *= -1.0;
+            if (distance < 0) distance  *= -1.0;
 
             return distance;
         }
