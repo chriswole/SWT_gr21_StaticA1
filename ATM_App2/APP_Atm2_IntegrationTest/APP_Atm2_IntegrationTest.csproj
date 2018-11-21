@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IntergrationTestClasses\BUStep2.cs" />
+    <Compile Include="IntergrationTestClasses\BUStep4_InOutTrack.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
