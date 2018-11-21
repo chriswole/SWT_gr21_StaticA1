@@ -195,8 +195,8 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
             List<string> testData_ = new List<string>()
             {
-                "ATR423;12000;12000;14000;2015100621345600",
-                "ATR423;14000;12000;14000;2015100621345700"
+                "ATR423;12000;12000;14000;2015100621345700",
+                "ATR423;14000;12000;14000;2015100621345600"
             };
 
            
@@ -286,15 +286,23 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
         #region OnTrackCreated_ResultsLeavingTrack_Tests
 
-        /*
+        
         [Test]
         public void OnTrackCreated_ResultsTrackLeaving_BeginWithSigleTrackInAirSpacList_CorrectlyHandled()
         {
 
+            
+
             Track[] _testTracks = new Track[]
             {
-                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
-                new Track("ATR423", new Position(0, 0), 14000, 0, 0, "20151006213456789"),
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "2015100621345600"),
+                new Track("ATR423", new Position(91000, 91000), 14000, 0, 0, "2015100621345700"),
+            };
+
+            List<string> testData_ = new List<string>()
+            {
+                "ATR423;12000;12000;14000;2015100621345600",
+                "ATR423;91000;91000;14000;2015100621345700"
             };
 
             int eventcounter = 0;
@@ -303,31 +311,26 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             List<Track> newAirspace = new List<Track>();
 
 
-            _uut.LeavingTrack += (o, arg) => { LeavingTrack = arg.newTrack_; };
+            inAirSpaceObserver_.LeavingTrack += (o, arg) => { LeavingTrack = arg.newTrack_; };
 
-            _uut.AirspaceUpdated += (o, args) =>
+            inAirSpaceObserver_.AirspaceUpdated += (o, args) =>
             {
                 eventcounter++;
                 newAirspace = args.TracksInAirSpace;
             };
 
+            receiver_.TransponderDataReady
+                += Raise.EventWith(this, new RawTransponderDataEventArgs(testData_));
 
-            for (int i = 0; i < 2; i++)
-            {
-                fakeTrackFactory_.TrackCreated
-                    += Raise.EventWith(this, new TrackArgs(_testTracks[i]));
-            }
+           // Assert.That(eventcounter, Is.EqualTo(_testTracks.Length));
 
 
-
-            Assert.That(eventcounter, Is.EqualTo(_testTracks.Length));
 
             Assert.That(newAirspace.Count == 0, Is.EqualTo(true));
             Assert.That(LeavingTrack.tag_ == _testTracks[1].tag_, Is.EqualTo(true));
-            Assert.That(LeavingTrack.pos_ == _testTracks[1].pos_, Is.EqualTo(true));
-
-
-        }*/
+            Assert.That(LeavingTrack.pos_.x_ == _testTracks[1].pos_.x_, Is.EqualTo(true));
+            Assert.That(LeavingTrack.pos_.y_ == _testTracks[1].pos_.y_, Is.EqualTo(true));
+        }
 
         #endregion 
     } 
