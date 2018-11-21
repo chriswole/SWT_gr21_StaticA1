@@ -64,25 +64,28 @@ namespace ATM_App2.Classes
                             if (newTrack.tag_ != track1.tag_)
                             {
                                 int i = 0;
+                                bool dangerNotReplaced = true; 
                                 Danger dangerObj = new Danger(newTrack, track1, (int) distance);
                                 foreach (var dangerObject in Dangers_)
                                 {
-                                    if (dangerObj.track1_ == dangerObject.track1_ && dangerObj.track2_ == dangerObject.track2_)
+                                    if (dangerObj.track1_ == dangerObject.track1_ && dangerObj.track2_ == dangerObject.track2_ || 
+                                        dangerObj.track2_ == dangerObject.track1_ && dangerObj.track1_ == dangerObject.track2_)
                                     {
                                         Dangers_[i] = dangerObj;
+                                        dangerNotReplaced = false;
                                         // lav Danger list updated event her. 
                                         OnDangerListUpdated(Dangers_);
-                                }
-                                    else
-                                    {
-                                        Dangers_.Add(dangerObj);
-                                        // lav Danger list updated event her. 
-                                        OnDangerListUpdated(Dangers_);
-                                }
-
+                                    }
+                                    
                                     i++;
                                 }
 
+                                if (dangerNotReplaced||Dangers_.Count==0)
+                                {
+                                    Dangers_.Add(dangerObj);
+                                    // lav Danger list updated event her. 
+                                    OnDangerListUpdated(Dangers_);
+                                }
                             }
                         }
                     }
