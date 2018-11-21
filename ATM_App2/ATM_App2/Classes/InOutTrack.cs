@@ -22,11 +22,15 @@ namespace ATM_App2.Classes
         private List<Track> ListOut;
         private List<TimeKeeper> TimerListIn;
         private List<TimeKeeper> TimerListOut;
+       
         public event EventHandler<EnteredTrackArgs> listInUpdated;
         public event EventHandler<LeftTrackArgs> listOutUpdated;
 
-        public InOutTrack()
+        private readonly ILogToFile _atmLog;
+
+        public InOutTrack(ILogToFile atmLogEvent = null)
         {
+            _atmLog = atmLogEvent ?? new LogToFile();
         }
         public void OnEnteredTrack(object sender, TrackArgs totrack)
         {
@@ -37,6 +41,7 @@ namespace ATM_App2.Classes
             TimerListIn.Add(mytime);
             ListIn.Add(totrack.newTrack_);
             OnListInUpdated(ListIn);
+            _atmLog.Log(totrack.newTrack_.timestamp_ + totrack.newTrack_.tag_ + " entereed");
         }
 
         protected virtual void OnListInUpdated(List<Track> ListIn)
@@ -48,6 +53,8 @@ namespace ATM_App2.Classes
             return;
         }
 
+
+
         public void OnLeavingTrack(object sender, TrackArgs totrack)
         {
             TimeKeeper mytime = new TimeKeeper();
@@ -57,6 +64,7 @@ namespace ATM_App2.Classes
             TimerListOut.Add(mytime);
             ListOut.Add(totrack.newTrack_);
             OnListOutUpdated(ListOut);//do stuff
+            _atmLog.Log(totrack.newTrack_.timestamp_ + totrack.newTrack_.tag_ + " left");
         }
         protected virtual void OnListOutUpdated(List<Track> ListOut)
         {
@@ -73,6 +81,7 @@ namespace ATM_App2.Classes
 
             ListIn.RemoveAt(0);
             OnListInUpdated(ListIn);
+
         }
         public void TimeElapsedOut(object sender, EventArgs e)
         {

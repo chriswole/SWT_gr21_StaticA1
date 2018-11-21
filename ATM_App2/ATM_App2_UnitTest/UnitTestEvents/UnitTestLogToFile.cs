@@ -19,7 +19,7 @@ namespace ATM_App2_UnitTest.UnitTestEvents
     [TestClass]
     public class UnitTestLogToFile
     {
-        private ILogToFile _uut;
+        private LogToFile _uut;
 
         [SetUp]
         public void Setup()

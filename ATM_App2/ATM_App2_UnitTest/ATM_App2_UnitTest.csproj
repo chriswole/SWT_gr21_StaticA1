@@ -83,9 +83,6 @@
     <Compile Include="UnitTestClasses\UnitTestTrack.cs" />
     <Compile Include="UnitTestClasses\UnitTestTrackOpticsProvider.cs" />
     <Compile Include="UnitTestEvents\UnitTestLogToFile.cs" />
-    <Compile Include="UnitTestEvents\UnitTestNotificationEventArgs.cs" />
-    <Compile Include="UnitTestEvents\UnitTestTrackEnteredAirspace.cs" />
-    <Compile Include="UnitTestEvents\UnitTestTrackLeftAirspace.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

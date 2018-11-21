@@ -16,13 +16,16 @@ namespace ATM_App2_UnitTest.UnitTestClasses
     {
         private InOutTrack _uut;
         private IInAirSpaceObserver fakeAirSpace_;
+        private ILogToFile log_;
 
 
         [SetUp]
         public void Setup()
         {
             fakeAirSpace_ = Substitute.For<IInAirSpaceObserver>();
-            _uut = new InOutTrack();
+            log_ = Substitute.For<ILogToFile>();
+            _uut = new InOutTrack(log_);
+
             fakeAirSpace_.EnteredTrack += _uut.OnEnteredTrack;
             fakeAirSpace_.LeavingTrack += _uut.OnLeavingTrack;
         }
