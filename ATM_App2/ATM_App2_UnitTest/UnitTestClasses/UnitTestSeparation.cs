@@ -136,7 +136,7 @@ namespace ATM_App2_UnitTest
         }
 
         [Test]
-        public void OnAirSpaceUpdated_ZSeparation_NotInAltitude_NoDangersMade()
+        public void OnAirSpaceUpdated_Separation_NotInAltitude_NoDangersMade()
         {
             // Arrange 
             List<Danger> Dangerlist = new List<Danger>();
@@ -180,7 +180,46 @@ namespace ATM_App2_UnitTest
         // List<Danger> Dangerlist = new List<Danger>();
         // uut_.DangerListUpdated += (o,args) => { Dangerlist = args.DangerList_; }; // for at "kigge på Dangers sendt til monitor
 
+        [Test]
+        public void OnAirSpaceUpdated_make1Danger_Remove1Danger()
+        {
+            //Arrange
+            List<Danger> Dangerlist = new List<Danger>();
+            List<Track> trackList = new List<Track>();
+            Track track1 = new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520412");
+            Track track2 = new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "20180304124520412");
+            Track track3 = new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520412");
+            Track track8 = new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304124520412");
 
+            int eventCounter = 0;
+
+            // Lambda expression, what happens at event in test.
+            uut_.DangerListUpdated += (o, args) =>
+            {
+                eventCounter++;
+                Dangerlist = args.DangerList_;
+            };
+
+
+
+            trackList.Insert(0, track1);
+            trackList.Insert(0, track2);
+            
+
+            //Act 
+            //Need to raise event after each Track added, to make certain all tracks have been compared.
+            fakeInAirSpaceObserver_.AirspaceUpdated += Raise.EventWith(this, new AirspaceTrackArgs(trackList));
+            trackList.Insert(0, track3);
+            fakeInAirSpaceObserver_.AirspaceUpdated += Raise.EventWith(this, new AirspaceTrackArgs(trackList));
+            trackList.Insert(0, track8);
+            fakeInAirSpaceObserver_.AirspaceUpdated += Raise.EventWith(this, new AirspaceTrackArgs(trackList));
+
+            //Assert
+            Assert.That(eventCounter,Is.EqualTo(2));
+            Assert.That(Dangerlist.Count,Is.EqualTo(0));
+
+
+        }
 
         #endregion
 
@@ -213,12 +252,22 @@ namespace ATM_App2_UnitTest
 
             // Assert
             Assert.That(Dlist.Count,Is.EqualTo(1));
-            
-
         }
-
-
 
         #endregion
     }
 }
+
+/*
+//Arrange
+Track track1 = new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520412");
+Track track2 = new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "20180304124520412");
+Track track3 = new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520412");
+Track track4 = new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "20180304124520412");
+Track track5 = new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "20180304124520412");
+Track track6 = new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "20180304124520412");
+Track track7 = new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "20180304124520412");
+Track track8 = new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304124520412");
+
+
+*/
