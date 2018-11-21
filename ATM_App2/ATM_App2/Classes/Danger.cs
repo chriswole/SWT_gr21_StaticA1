@@ -19,6 +19,7 @@ namespace ATM_App2.Classes
         public Track track1_ { get; private set; }
         public Track track2_ { get; private set; }
         public int distance_ { get; private set; }
+        public int altDistance_ { get; private set; }
         // the print function for Danger
         // the altitude is per definition less than 300, otherwise danger isn't created. 
         //public void print()
@@ -33,10 +34,9 @@ namespace ATM_App2.Classes
         public static bool operator ==(Danger danger1, Danger danger2)
         {
 
-            if (danger1.track1_.tag_ == danger2.track1_.tag_
-                //danger1.track2_ == danger2.track2_ &&
-                //danger1.distance_ == danger2.distance_
-            )
+            if (danger1.track1_.tag_ == danger2.track1_.tag_ &&
+                danger1.track2_ == danger2.track2_ &&
+                danger1.distance_ == danger2.distance_)
                 return true;
             else
             {
@@ -48,8 +48,8 @@ namespace ATM_App2.Classes
         public static bool operator !=(Danger danger1, Danger danger2)
         {
 
-            if (danger1.track1_ != danger2.track1_ &&
-                danger1.track2_ != danger2.track2_ &&
+            if (danger1.track1_ != danger2.track1_ ||
+                danger1.track2_ != danger2.track2_ ||
                 danger1.distance_ != danger2.distance_)
                 return true;
             else

@@ -68,7 +68,7 @@
     <Compile Include="Interfaces\IInAirSpaceObserver.cs" />
     <Compile Include="Interfaces\IInOutTrack.cs" />
     <Compile Include="Interfaces\ILogToFile.cs" />
-    <Compile Include="Interfaces\ISeperation.cs" />
+    <Compile Include="Interfaces\ISeparation.cs" />
     <Compile Include="Interfaces\IStringParser.cs" />
     <Compile Include="Interfaces\ITimekeeper.cs" />
     <Compile Include="Interfaces\ITrackFactory.cs" />

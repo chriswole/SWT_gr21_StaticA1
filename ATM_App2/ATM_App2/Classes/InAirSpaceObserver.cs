@@ -162,7 +162,4 @@ namespace ATM_App2.Classes
             activeTrack.hori_velocity_ = (int) opticsProvider_.GetTrackVelocity(activeTrack, passTrack);
         }
     }
-
-    //Logic to Calculate Speed and Course, remember explicit tests
-
 }
