@@ -158,36 +158,31 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
         }
        #endregion
 
-       /* #region OnTrackCreated_ResultsUpdatedAirspace_Tests
+      // #region OnTrackCreated_ResultsUpdatedAirspace_Tests
         
         
         [Test]
         public void OnTrackCreated_ResultsUpdatedAirspace_BeginWithSigleTrackInAirSpacList_SinglTrackInListSentInUpdateEvent()
         {
-
-            Track[] _testTracks = new Track[]
+           
+            List<string> testData_ = new List<string>()
             {
-               new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
-               new Track("ATR423", new Position(14000, 14000), 14000, 0, 0, "20151006213456790")
+                "ATR423;12000;12000;14000;2015100621345600",
+                "ATR423;14000;14000;14000;2015100621345700"
             };
+           List<Track> newAirspace = new List<Track>();
+
+            inAirSpaceObserver_.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
 
 
-            List<Track> newAirspace = new List<Track>();
-
-            _uut.AirspaceUpdated += (o, args) => { newAirspace = args.TracksInAirSpace; };
-
-
-            foreach (var track in _testTracks)
-            {
-                fakeTrackFactory_.TrackCreated
-                    += Raise.EventWith(this, new TrackArgs(track));
-            }
+            receiver_.TransponderDataReady
+                += Raise.EventWith(this, new RawTransponderDataEventArgs(testData_));
 
             Assert.That(newAirspace.Count, Is.EqualTo(1));
 
         }
 
-        [Test]
+/*       [Test]
         public void OnTrackCreated_ResultsUpdatedAirspace_BeginWithSigleTrackInAirSpacList_TrackInListHasUpdatedCourseAndVelocity()
         {
 
