@@ -95,6 +95,8 @@ namespace ATM_App2.Classes
         public List<Danger> RemoveOldDangers(Track newTrack, List<Danger> dangerList)
         {
             bool changedList = false;
+            int i = 0; 
+            List< int> IndexesToRemove = new List<int>();
 
             foreach (var dan in dangerList)
             {   // if changed track is track1_
@@ -109,8 +111,7 @@ namespace ATM_App2.Classes
                         var distance = Math.Sqrt((dist.x_ * dist.x_) + (dist.y_ * dist.y_));
                         if (distance > 5000)
                         {
-                            // remove danger from list, since it is not danger anymore
-                            dangerList.Remove(dan);
+                            IndexesToRemove.Insert(0,i);
                             changedList = true;
                         }
                     }
@@ -125,16 +126,22 @@ namespace ATM_App2.Classes
                         var distance = Math.Sqrt((dist.x_ * dist.x_) + (dist.y_ * dist.y_));
                         if (distance > 5000)
                         {
-                            // remove danger from list, since it is not danger anymore
-                            dangerList.Remove(dan);
+                            IndexesToRemove.Insert(0,i);
                             changedList = true;
                         }
                     }
                 }
+
+                i++;
             }
 
             if (changedList)
             {
+                foreach (var index in IndexesToRemove)
+                {
+                    // remove danger from list, since it is not danger anymore
+                    dangerList.Remove(dangerList[index]);
+                }
                 OnDangerListUpdated(dangerList);
             }
             return dangerList;
