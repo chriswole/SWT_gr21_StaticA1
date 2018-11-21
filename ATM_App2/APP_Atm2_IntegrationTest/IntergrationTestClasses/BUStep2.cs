@@ -103,34 +103,33 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             Assert.That(newAirspace[0] == _testTracks[_testTracks.Length - 1], Is.EqualTo(true));
         }
 
-/*
+
 
         [Test]
         public void OnTrackCreated_ResultsEnteringTrack_BeginWithTracksInAirSpaceList_RightNumberInListSentInUpdateEvent()
         {
-            Track[] _testTracks = new Track[]
+            
+            List<string> testData_ = new List<string>()
             {
-                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
-                new Track("BB8832", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
-                new Track("CC8832", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                "ATR423;12000;12000;14000;20151006213456789",
+                "BB8832;12000;12000;14000;20151006213456789",
+                "CC8832;12000;12000;14000;20151006213456789"
             };
 
             List<Track> newAirspace = new List<Track>();
 
-            _uut.AirspaceUpdated += (o, args) =>
+            inAirSpaceObserver_.AirspaceUpdated += (o, args) =>
             {
                 newAirspace = args.TracksInAirSpace;
             };
 
+            receiver_.TransponderDataReady
+                += Raise.EventWith(this, new RawTransponderDataEventArgs(testData_));
 
-            foreach (var track in _testTracks)
-            {
-                fakeTrackFactory_.TrackCreated
-                    += Raise.EventWith(this, new TrackArgs(track));
-            }
-
-            Assert.That(newAirspace.Count, Is.EqualTo(_testTracks.Length));
+            Assert.That(newAirspace.Count, Is.EqualTo(testData_.Count));
         }
+
+        /*
 
         [Test]
         public void OnTrackCreated_ResultsEnteringTrack_RightNumberOfEventsSent_IncludingAirspaceUpdated()
