@@ -64,25 +64,28 @@ namespace ATM_App2.Classes
                             if (newTrack.tag_ != track1.tag_)
                             {
                                 int i = 0;
+                                bool dangerNotReplaced = true; 
                                 Danger dangerObj = new Danger(newTrack, track1, (int) distance);
                                 foreach (var dangerObject in Dangers_)
                                 {
-                                    if (dangerObj.track1_ == dangerObject.track1_ && dangerObj.track2_ == dangerObject.track2_)
+                                    if (dangerObj.track1_ == dangerObject.track1_ && dangerObj.track2_ == dangerObject.track2_ || 
+                                        dangerObj.track2_ == dangerObject.track1_ && dangerObj.track1_ == dangerObject.track2_)
                                     {
                                         Dangers_[i] = dangerObj;
+                                        dangerNotReplaced = false;
                                         // lav Danger list updated event her. 
                                         OnDangerListUpdated(Dangers_);
-                                }
-                                    else
-                                    {
-                                        Dangers_.Add(dangerObj);
-                                        // lav Danger list updated event her. 
-                                        OnDangerListUpdated(Dangers_);
-                                }
-
+                                    }
+                                    
                                     i++;
                                 }
 
+                                if (dangerNotReplaced||Dangers_.Count==0)
+                                {
+                                    Dangers_.Add(dangerObj);
+                                    // lav Danger list updated event her. 
+                                    OnDangerListUpdated(Dangers_);
+                                }
                             }
                         }
                     }
@@ -95,6 +98,8 @@ namespace ATM_App2.Classes
         public List<Danger> RemoveOldDangers(Track newTrack, List<Danger> dangerList)
         {
             bool changedList = false;
+            int i = 0; 
+            List< int> IndexesToRemove = new List<int>();
 
             foreach (var dan in dangerList)
             {   // if changed track is track1_
@@ -109,8 +114,7 @@ namespace ATM_App2.Classes
                         var distance = Math.Sqrt((dist.x_ * dist.x_) + (dist.y_ * dist.y_));
                         if (distance > 5000)
                         {
-                            // remove danger from list, since it is not danger anymore
-                            dangerList.Remove(dan);
+                            IndexesToRemove.Insert(0,i);
                             changedList = true;
                         }
                     }
@@ -125,16 +129,22 @@ namespace ATM_App2.Classes
                         var distance = Math.Sqrt((dist.x_ * dist.x_) + (dist.y_ * dist.y_));
                         if (distance > 5000)
                         {
-                            // remove danger from list, since it is not danger anymore
-                            dangerList.Remove(dan);
+                            IndexesToRemove.Insert(0,i);
                             changedList = true;
                         }
                     }
                 }
+
+                i++;
             }
 
             if (changedList)
             {
+                foreach (var index in IndexesToRemove)
+                {
+                    // remove danger from list, since it is not danger anymore
+                    dangerList.Remove(dangerList[index]);
+                }
                 OnDangerListUpdated(dangerList);
             }
             return dangerList;
