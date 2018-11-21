@@ -33,7 +33,7 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             factory_.TrackCreated += inAirSpaceObserver_.OnTrackCreated;
         }
 
-        //#region OnTrackCreated_ResultsEnteringTrack_Tests
+        #region OnTrackCreated_ResultsEnteringTrack_Tests
 
         [Test]
         public void OnTrackCreated_ResultEnteringTrack_CorrectEnteredTrackEventSent()
@@ -129,40 +129,38 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             Assert.That(newAirspace.Count, Is.EqualTo(testData_.Count));
         }
 
-        /*
+        
 
         [Test]
         public void OnTrackCreated_ResultsEnteringTrack_RightNumberOfEventsSent_IncludingAirspaceUpdated()
         {
-            Track[] _testTracks = new Track[]
+            List<string> testData_ = new List<string>()
             {
-                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
-                new Track("BB8832", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
-                new Track("CC8832", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                "ATR423;12000;12000;14000;20151006213456789",
+                "BB8832;12000;12000;14000;20151006213456789",
+                "CC8832;12000;12000;14000;20151006213456789"
             };
 
             int eventcounter = 0;
 
             List<Track> newAirspace = new List<Track>();
 
-            _uut.EnteredTrack += (o, args) => { eventcounter++; };
+            inAirSpaceObserver_.EnteredTrack += (o, args) => { eventcounter++; };
 
-            _uut.AirspaceUpdated += (o, args) => { eventcounter++; };
+            inAirSpaceObserver_.AirspaceUpdated += (o, args) => { eventcounter++; };
 
 
-            foreach (var track in _testTracks)
-            {
-                fakeTrackFactory_.TrackCreated
-                    += Raise.EventWith(this, new TrackArgs(track));
-            }
+            receiver_.TransponderDataReady
+                += Raise.EventWith(this, new RawTransponderDataEventArgs(testData_));
 
-            Assert.That(eventcounter, Is.EqualTo(2 * _testTracks.Length));
+            Assert.That(eventcounter, Is.EqualTo(2 * testData_.Count));
 
         }
-        #endregion
+       #endregion
 
-        #region OnTrackCreated_ResultsUpdatedAirspace_Tests
-
+       /* #region OnTrackCreated_ResultsUpdatedAirspace_Tests
+        
+        
         [Test]
         public void OnTrackCreated_ResultsUpdatedAirspace_BeginWithSigleTrackInAirSpacList_SinglTrackInListSentInUpdateEvent()
         {
