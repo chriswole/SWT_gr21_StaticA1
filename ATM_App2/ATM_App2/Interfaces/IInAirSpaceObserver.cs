@@ -12,5 +12,8 @@ namespace ATM_App2.Interfaces
         event EventHandler<AirspaceTrackArgs> AirspaceUpdated;
         event EventHandler<TrackArgs> EnteredTrack;
         event EventHandler<TrackArgs> LeavingTrack;
+
+        void OnTrackCreated(object sender, TrackArgs args);
     }
 }
+
