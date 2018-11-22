@@ -13,17 +13,15 @@ namespace ATM_App2_UnitTest
     public class UnitTestSeparation
     {
         private IInAirSpaceObserver fakeInAirSpaceObserver_; 
-        private ITrackOpticsProvider fakeOpticsProvider_;
         private ILogToFile fakeLogToFile_;
         private Separation uut_;
 
         [SetUp]
         public void Setup()
         {
-            fakeOpticsProvider_ = Substitute.For<ITrackOpticsProvider>();
             fakeLogToFile_ = Substitute.For<ILogToFile>();
             fakeInAirSpaceObserver_ = Substitute.For<IInAirSpaceObserver>();
-            uut_ = new Separation(fakeLogToFile_, fakeOpticsProvider_);
+            uut_ = new Separation(fakeLogToFile_);
 
             fakeInAirSpaceObserver_.AirspaceUpdated += uut_.OnAirspaceUpdated;
 

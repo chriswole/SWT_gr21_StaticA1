@@ -32,10 +32,9 @@ namespace ATM_App2.Classes
             }
 
        
-            public Separation(ILogToFile logger2File, ITrackOpticsProvider opticsProvider)
+            public Separation(ILogToFile logger2File)
             {
                 Dangers_ = new List<Danger>();
-                opticsProvider_ = opticsProvider;
                 //?? returns the left side if not null, if null right side is returned.
                 loggerToFile_ = logger2File ?? new LogToFile();
             }
