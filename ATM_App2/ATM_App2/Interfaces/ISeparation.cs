@@ -10,7 +10,12 @@ namespace ATM_App2.Interfaces
     public interface ISeparation
     {
         event EventHandler<DangerlistArgs> DangerListUpdated;
+
         void CalculateDistances(List<Track> trackList);
- 
+
+        void OnAirspaceUpdated(object sender, AirspaceTrackArgs argList);
+
+
+
     }
 }
