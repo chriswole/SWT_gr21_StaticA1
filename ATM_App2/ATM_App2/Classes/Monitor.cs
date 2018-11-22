@@ -48,11 +48,11 @@ namespace ATM_App2.Classes
         {
 
             //Subscribing to planes entering the airspace
-            InOutTrack entering = new InOutTrack();
+            InOutTrackHandler entering = new InOutTrackHandler();
             entering.listInUpdated += new System.EventHandler<EnteredTrackArgs>(OnEntered);
             
             //Subscribing to planes leaving the airspace
-            InOutTrack leaving = new InOutTrack();
+            InOutTrackHandler leaving = new InOutTrackHandler();
             leaving.listOutUpdated += new System.EventHandler<LeftTrackArgs>(OnDeleted);
 
 

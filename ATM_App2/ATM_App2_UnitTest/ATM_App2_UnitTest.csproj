@@ -75,7 +75,7 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UnitTestClasses\StringParserUnitTest.cs" />
-    <Compile Include="UnitTestClasses\UnitTestInOutTrack.cs" />
+    <Compile Include="UnitTestClasses\UnitTestInOutTrackHandler.cs" />
     <Compile Include="UnitTestClasses\UnitTestMonitor.cs" />
     <Compile Include="UnitTestClasses\UnitTestInAirSpace.cs" />
     <Compile Include="UnitTestClasses\UnitTestSeparation.cs" />

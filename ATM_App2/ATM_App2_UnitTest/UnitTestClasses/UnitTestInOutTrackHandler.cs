@@ -13,9 +13,9 @@ using System.Threading;
 namespace ATM_App2_UnitTest.UnitTestClasses
 {
     [TestClass]
-    public class UnitTestInOutTrack
+    public class UnitTestInOutTrackHandler
     {
-        private InOutTrack _uut;
+        private InOutTrackHandler _uut;
         private IInAirSpaceObserver fakeAirSpace_;
         private ILogToFile log_;
 
@@ -25,7 +25,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
         {
             fakeAirSpace_ = Substitute.For<IInAirSpaceObserver>();
             log_ = Substitute.For<ILogToFile>();
-            _uut = new InOutTrack(log_);
+            _uut = new InOutTrackHandler(log_);
 
             fakeAirSpace_.EnteredTrack += _uut.OnEnteredTrack;
             fakeAirSpace_.LeavingTrack += _uut.OnLeavingTrack;
@@ -33,10 +33,9 @@ namespace ATM_App2_UnitTest.UnitTestClasses
         [Test]
         public void OnEnteredTrack_TestEvntcalledOnes()
         {
-
             List<Track> newList = new List<Track>();
             Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12000, 10, 34, "2016111912343892");
-           
+
             int _evenCounter = 0;
 
             _uut.listInUpdated += (o, args) =>
@@ -45,7 +44,6 @@ namespace ATM_App2_UnitTest.UnitTestClasses
                 newList = args.listEntered;
             };
 
-            
             fakeAirSpace_.EnteredTrack += Raise.EventWith(this, new TrackArgs(inserTrack));
 
             Assert.That(_evenCounter, Is.EqualTo(1));
@@ -59,11 +57,11 @@ namespace ATM_App2_UnitTest.UnitTestClasses
             Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12050, 10, 34, "2016111912343892");
             Track inserTrack1 = new Track("MCJ523", new Position(15000, 13002), 12400, 10, 34, "2016111932343892");
             Track inserTrack2 = new Track("MCJ523", new Position(15000, 13040), 12300, 10, 34, "2016111945343892");
-            
+
 
             int _evenCounter = 0;
 
-            _uut.listInUpdated += (o, args) => 
+            _uut.listInUpdated += (o, args) =>
             {
                 _evenCounter++;
                 newList = args.listEntered;
@@ -87,7 +85,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
 
             List<Track> newList = new List<Track>();
             Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12000, 10, 34, "2016111912343892");
-            
+
             int _evenCounter = 0;
 
             _uut.listOutUpdated += (o, args) => { _evenCounter++; newList = args.listLeft; };
@@ -106,7 +104,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
             Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12050, 10, 34, "2016111912343892");
             Track inserTrack1 = new Track("MCJ533", new Position(15000, 13002), 12400, 10, 34, "2016111932343892");
             Track inserTrack2 = new Track("MCJ553", new Position(15000, 13040), 12300, 10, 34, "2016111945343892");
-           
+
             int _evenCounter = 0;
 
             _uut.listOutUpdated += (o, args) =>
@@ -131,7 +129,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
         {
             List<Track> newList = new List<Track>();
             Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12000, 10, 34, "2016111912343892");
-            
+
             int _evenCounter = 0;
 
             _uut.listInUpdated += (o, args) =>
