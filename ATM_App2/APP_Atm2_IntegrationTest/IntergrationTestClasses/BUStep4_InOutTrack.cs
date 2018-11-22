@@ -5,6 +5,7 @@ using System.Linq;
 using ATM_App2.Classes;
 using ATM_App2.Events;
 using ATM_App2.Interfaces;
+using Castle.Components.DictionaryAdapter;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NSubstitute;
 using NUnit.Framework;
@@ -35,7 +36,6 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
         [Test]
         public void OnEnteredTrack_TestEvntcalledOnes()
         {
-
             List<Track> newList = new List<Track>();
             Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12000, 10, 34, "2016111912343892");
             newList.Add(inserTrack);
@@ -46,7 +46,7 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
             inAirSpaceObserver_.EnteredTrack += Raise.EventWith(this, new TrackArgs(inserTrack));
 
-            Assert.That( newList.Count, Is.EqualTo(1));
+            Assert.That(newList.Count, Is.EqualTo(1));
 
         }
       
@@ -54,6 +54,7 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
                 [Test]
                 public void OnEnteredTrack_TestEvntcalledTheeTimes()
                 {
+                   
                     List<Track> newList = new List<Track>();
                     Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12050, 10, 34, "2016111912343892");
                     Track inserTrack1 = new Track("MCJ523", new Position(15000, 13002), 12400, 10, 34, "2016111932343892");

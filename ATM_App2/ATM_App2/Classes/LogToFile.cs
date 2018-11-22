@@ -39,7 +39,7 @@ namespace ATM_App2.Events
             using (var sr = File.AppendText(_path))
             {
                 sr.Write(dan.track1_.tag_ + " and " + dan.track2_.tag_);
-                sr.Write($" Distance: {0} ", dan.distance_);
+                sr.WriteLine(" Distance: {0} ", dan.distance_);
             }
         }
     }
