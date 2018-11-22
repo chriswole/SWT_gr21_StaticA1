@@ -140,6 +140,7 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
         public void OnAirSpaceUpdated_NoSeparationInList_NoDangersMade()
         {
             //Arrange
+            List<Danger> Dangerlist = new List<Danger>();
             Track[] _testTracks = new Track[]
             {
                 //new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520412"),
@@ -154,16 +155,23 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
             int eventCounter = 0;
 
+            // Lambda expression, what happens at event in test.
+            separationControl_.DangerListUpdated += (o, args) =>
+            {
+                eventCounter++;
+                Dangerlist = args.DangerList_;
+            };
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated
+                    += Raise.EventWith(this, new TrackArgs(track));
+            }
 
-            separationControl_.DangerListUpdated += (o, args) => { eventCounter++; };
-
-
-
-
-
-
+            
             //Assert
             Assert.That(eventCounter, Is.EqualTo(0));
+            Assert.That(Dangerlist.Count,Is.EqualTo(0));
+
         }
 
 
