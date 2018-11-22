@@ -52,33 +52,7 @@ namespace ATM_App2.Classes
             if (course < 0)
                 course += 360.0;
             
-
             return course;
-            /*
-            double course = Math.Atan2(activeTrack.pos_.y_ - passiveTrack.pos_.y_, activeTrack.pos_.x_ - passiveTrack.pos_.x_);
-
-            if (course < 0)
-            {
-                course += 360;
-            }
-
-            course += 90.0;
-
-
-           //(e = course;
-
-            /*
-            var angle = Math.Atan2(activeTrack.pos_.y_, activeTrack.pos_.x_) -
-                        Math.Atan2(passiveTrack.pos_.y_, passiveTrack.pos_.x_);
-
-            angle = angle * 360.0 / (2 * Math.PI);
-            if (angle < 0)
-            {
-                angle = angle + 360.0;
-            }
-           // angle = ((angle % 360) + 360) % 360; */
-
-            //return course;
         }
 
         private double GetSecondsBetweenTimeStamps(string oldTimeStamp, string newTimeStamp)
@@ -94,6 +68,7 @@ namespace ATM_App2.Classes
 
 
             var seconds = (secondTime - firstTime).TotalSeconds;
+            if (seconds < 0) seconds *= -1.0;
 
             return seconds;
         }

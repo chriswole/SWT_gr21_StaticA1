@@ -322,10 +322,6 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             receiver_.TransponderDataReady
                 += Raise.EventWith(this, new RawTransponderDataEventArgs(testData_));
 
-           // Assert.That(eventcounter, Is.EqualTo(_testTracks.Length));
-
-
-
             Assert.That(newAirspace.Count == 0, Is.EqualTo(true));
             Assert.That(LeavingTrack.tag_ == _testTracks[1].tag_, Is.EqualTo(true));
             Assert.That(LeavingTrack.pos_.x_ == _testTracks[1].pos_.x_, Is.EqualTo(true));

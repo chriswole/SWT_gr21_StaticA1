@@ -74,8 +74,8 @@ namespace ATM_App2_UnitTest.UnitTestClasses
             Assert.That(_evenCounter, Is.EqualTo(3));
             Assert.That(newList.Count, Is.EqualTo(3));
             Assert.That(newList[0] == inserTrack, Is.True);
-            Assert.That(newList[1] == inserTrack1);
-            Assert.That(newList[2] == inserTrack2);
+            Assert.That(newList[1] == inserTrack1, Is.True);
+            Assert.That(newList[2] == inserTrack2, Is.True);
         }
 
 
@@ -121,8 +121,8 @@ namespace ATM_App2_UnitTest.UnitTestClasses
             Assert.That(_evenCounter, Is.EqualTo(3));
             Assert.That(newList.Count, Is.EqualTo(3));
             Assert.That(newList[0] == inserTrack, Is.True);
-            Assert.That(newList[1] == inserTrack1);
-            Assert.That(newList[2] == inserTrack2);
+            Assert.That(newList[1] == inserTrack1, Is.True);
+            Assert.That(newList[2] == inserTrack2, Is.True);
         }
         [Test]
         public void OnEnteredTrack_TestEvntcalledOnes_TestgetList()
