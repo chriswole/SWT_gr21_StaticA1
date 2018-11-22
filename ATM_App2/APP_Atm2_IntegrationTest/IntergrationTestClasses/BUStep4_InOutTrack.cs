@@ -98,7 +98,7 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
         }
 
-        /*
+        
                 [Test]
                 public void OnLeavingTrack_TestEvntcalledOnes()
                 {
@@ -122,7 +122,7 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
                     Assert.That(newList.Count, Is.EqualTo(1));
 
                 }
-
+        /*
                 [Test]
                 public void OnLeavingTrack_TestEvntcalledTree()
                 {
@@ -206,6 +206,202 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
         }
 
+
+        [Test]
+        public void OnAirSpaceUpdated_1SeparationInList_1DangersMade()
+        {
+            //Arrange
+            List<Danger> Dangerlist = new List<Danger>();
+            Track[] _testTracks = new Track[]
+            {
+                new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520412"),
+                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "20180304124520412"),
+                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520412"),
+                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "20180304124520412"),
+                //new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "20180304124520412"),
+                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "20180304124520412"),
+                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "20180304124520412"),
+                //new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304124520412")
+            };
+            Danger testdanger = new Danger(_testTracks[0], _testTracks[1], 1802);
+
+            int eventCounter = 0;
+
+            // Lambda expression, what happens at event in test.
+            separationControl_.DangerListUpdated += (o, args) =>
+            {
+                eventCounter++;
+                Dangerlist = args.DangerList_;
+            };
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated
+                    += Raise.EventWith(this, new TrackArgs(track));
+            }
+
+
+            //Assert
+            Assert.That(eventCounter, Is.EqualTo(1));
+            Assert.That(Dangerlist.Count, Is.EqualTo(1));
+            Assert.That(Dangerlist[0] == testdanger, Is.True);
+
+        }
+
+
+        [Test]
+        public void OnAirSpaceUpdated_XYSeparation_NotInAltitude_NoDangersMade()
+        {
+            //Arrange
+            List<Danger> Dangerlist = new List<Danger>();
+            Track[] _testTracks = new Track[]
+            {
+                new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520412"),
+                new Track("JASK742", new Position(25000, 12500), 8000, 0, 0, "20180304124520412"),
+                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520412"),
+                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "20180304124520412"),
+                //new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "20180304124520412"),
+                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "20180304124520412"),
+                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "20180304124520412"),
+                //new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304124520412")
+            };
+
+            int eventCounter = 0;
+
+            // Lambda expression, what happens at event in test.
+            separationControl_.DangerListUpdated += (o, args) =>
+            {
+                eventCounter++;
+                Dangerlist = args.DangerList_;
+            };
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated
+                    += Raise.EventWith(this, new TrackArgs(track));
+            }
+
+
+            //Assert
+            Assert.That(eventCounter, Is.EqualTo(0));
+            Assert.That(Dangerlist.Count, Is.EqualTo(0));
+
+        }
+
+        [Test]
+        public void OnAirSpaceUpdated_Separation_NotInAltitude_NoDangersMade()
+        {
+            //Arrange
+            List<Danger> Dangerlist = new List<Danger>();
+            Track[] _testTracks = new Track[]
+            {
+                //new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520412"),
+                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "20180304124520412"),
+                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520412"),
+                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "20180304124520412"),
+                //new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "20180304124520412"),
+                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "20180304124520412"),
+                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "20180304124520412"),
+                new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304124520412")
+            };
+
+            int eventCounter = 0;
+
+            // Lambda expression, what happens at event in test.
+            separationControl_.DangerListUpdated += (o, args) =>
+            {
+                eventCounter++;
+                Dangerlist = args.DangerList_;
+            };
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated
+                    += Raise.EventWith(this, new TrackArgs(track));
+            }
+
+
+            //Assert
+            Assert.That(eventCounter, Is.EqualTo(0));
+            Assert.That(Dangerlist.Count, Is.EqualTo(0));
+
+        }
+
+
+
+        [Test]
+        public void OnAirSpaceUpdated_make1Danger_Remove1Danger()
+        {
+            //Arrange
+            List<Danger> Dangerlist = new List<Danger>();
+            Track[] _testTracks = new Track[]
+            {
+                new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "2018030412452041"),
+                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "2018030412452041"),
+                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "2018030412452041"),
+                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "2018030412452041"),
+                new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "2018030412452041"),
+                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "2018030412452041"),
+                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "2018030412452041"),
+                new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "2018030412454041")
+            };
+
+            int eventCounter = 0;
+
+            // Lambda expression, what happens at event in test.
+            separationControl_.DangerListUpdated += (o, args) =>
+            {
+                eventCounter++;
+                Dangerlist = args.DangerList_;
+            };
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated
+                    += Raise.EventWith(this, new TrackArgs(track));
+            }
+
+
+            //Assert
+            Assert.That(eventCounter, Is.EqualTo(2));
+            Assert.That(Dangerlist.Count, Is.EqualTo(0));
+
+        }
+
+        [Test]
+        public void OnAirSpaceUpdated_make2Danger_update1Danger()
+        {
+            //Arrange
+            List<Danger> Dangerlist = new List<Danger>();
+            Track[] _testTracks = new Track[]
+            {
+                new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "2018030412452041"),
+                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "2018030412452041"),
+                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "2018030412452041"),
+                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "2018030412452041"),
+                new Track("WUAX143", new Position(55200, 64500), 500, 0, 0, "2018030412452041"),
+                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "2018030412452041"),
+                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "2018030412452041"),
+                new Track("HSAN329", new Position(24500, 12000), 600, 0, 0, "2018030412454041")
+            };
+
+            int eventCounter = 0;
+
+            // Lambda expression, what happens at event in test.
+            separationControl_.DangerListUpdated += (o, args) =>
+            {
+                eventCounter++;
+                Dangerlist = args.DangerList_;
+            };
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated
+                    += Raise.EventWith(this, new TrackArgs(track));
+            }
+
+
+            //Assert
+            Assert.That(eventCounter, Is.EqualTo(3));
+            Assert.That(Dangerlist.Count, Is.EqualTo(2));
+
+
+        }
 
 
 

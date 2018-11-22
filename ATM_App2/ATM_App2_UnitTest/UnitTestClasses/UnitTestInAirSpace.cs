@@ -312,12 +312,17 @@ namespace ATM_App2_UnitTest
             };
 
             int eventcounter = 0;
+        //    int eventcounter_Leaving = 0;
 
             Track LeavingTrack = new Track();
             List<Track> newAirspace = new List<Track>();
 
 
-            _uut.LeavingTrack += (o, arg) => { LeavingTrack = arg.newTrack_; };
+            _uut.LeavingTrack += (o, arg) =>
+            {
+        //        eventcounter_Leaving++;
+                LeavingTrack = arg.newTrack_;
+            };
 
             _uut.AirspaceUpdated += (o, args) =>
             {
@@ -333,7 +338,7 @@ namespace ATM_App2_UnitTest
             }
 
 
-
+            // Assert.That(eventcounter_Leaving, Is.EqualTo(1));
             Assert.That(eventcounter, Is.EqualTo(_testTracks.Length));
 
             Assert.That(newAirspace.Count == 0, Is.EqualTo(true));
