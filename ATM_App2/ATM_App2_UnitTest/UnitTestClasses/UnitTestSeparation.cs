@@ -311,6 +311,6 @@ Track track5 = new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "20
 Track track6 = new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "20180304124520412");
 Track track7 = new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "20180304124520412");
 Track track8 = new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304124520412");
-
+separations: 1-2,3-5
 
 */
