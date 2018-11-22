@@ -8,7 +8,7 @@ using ATM_App2.Events;
 
 namespace ATM_App2.Interfaces
 {
-    public interface IInOutTrack
+    public interface IInOutTrackHandler
     {
         event EventHandler<EnteredTrackArgs> listInUpdated;
         event EventHandler<LeftTrackArgs> listOutUpdated;
