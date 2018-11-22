@@ -128,7 +128,7 @@ namespace ATM_App2.Classes
 
         protected virtual void OnLeavingTrack(Track TrackThatLeft)
         {
-            LeavingTrack?.Invoke(this, new TrackArgs(){newTrack_ = TrackThatLeft});
+            LeavingTrack?.Invoke(this, new TrackArgs(TrackThatLeft));
         }
 
         private bool InScope(Track track)
