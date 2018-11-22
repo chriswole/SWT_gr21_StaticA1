@@ -307,12 +307,12 @@ namespace ATM_App2_UnitTest
 
             Track[] _testTracks = new Track[]
             {
-                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
-                new Track("ATR423", new Position(0, 0), 14000, 0, 0, "20151006213456789"),
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "2015100621345600"),
+                new Track("ATR423", new Position(0, 0), 14000, 0, 0, "2015100621345600"),
             };
 
             int eventcounter = 0;
-        //    int eventcounter_Leaving = 0;
+            int eventcounter_Leaving = 0;
 
             Track LeavingTrack = new Track();
             List<Track> newAirspace = new List<Track>();
@@ -320,7 +320,7 @@ namespace ATM_App2_UnitTest
 
             _uut.LeavingTrack += (o, arg) =>
             {
-        //        eventcounter_Leaving++;
+                eventcounter_Leaving++;
                 LeavingTrack = arg.newTrack_;
             };
 
@@ -338,7 +338,7 @@ namespace ATM_App2_UnitTest
             }
 
 
-            // Assert.That(eventcounter_Leaving, Is.EqualTo(1));
+             Assert.That(eventcounter_Leaving, Is.EqualTo(1));
             Assert.That(eventcounter, Is.EqualTo(_testTracks.Length));
 
             Assert.That(newAirspace.Count == 0, Is.EqualTo(true));
