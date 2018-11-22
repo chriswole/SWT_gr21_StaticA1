@@ -29,8 +29,8 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
         public void Setup()
         {
             atmLog_ = new LogToFile();
-            trackOpticsProvider_=new TrackOpticsProvider();
-            inAirSpaceObserver_=new InAirSpaceObserver(trackOpticsProvider_);
+            trackOpticsProvider_ = new TrackOpticsProvider();
+            inAirSpaceObserver_ = new InAirSpaceObserver(trackOpticsProvider_);
             InOutHandler_ = new InOutTrackHandler(atmLog_);
             separationControl_ = new Separation(atmLog_);
 
@@ -44,92 +44,124 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
         #region InOutTrack
 
-        
 
-          
+
         [Test]
         public void OnEnteredTrack_TestEvntcalledOnes()
         {
             List<Track> newList = new List<Track>();
-            Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12000, 10, 34, "2016111912343892");
-            newList.Add(inserTrack);
+            Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12000, 10, 34, "20180304124520412");
 
             int _evenCounter = 0;
 
-            InOutHandler_.listInUpdated += (o, arg) => { _evenCounter++; };
+            InOutHandler_.listInUpdated += (o, args) =>
+            {
+                _evenCounter++;
+                newList = args.listEntered;
+            };
 
-            inAirSpaceObserver_.EnteredTrack += Raise.EventWith(this, new TrackArgs(inserTrack));
+            fakeTrackFactory_.TrackCreated += Raise.EventWith(this, new TrackArgs(inserTrack));
 
-            Assert.That(newList.Count, Is.EqualTo(1));
+            Assert.That(_evenCounter, Is.EqualTo(1));
+            Assert.That(_evenCounter, Is.EqualTo(newList.Count));
+            Assert.That(newList[0] == inserTrack, Is.True);
+        }
+
+        [Test]
+        public void OnEnteredTrack_TestEvntcalledTheeTimes()
+        {
+            List<Track> newList = new List<Track>();
+            Track[] _testTracks = new Track[]
+            {
+                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "20180304124520412"),
+                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520412"),
+                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "20180304124520412")
+            };
+
+            int _evenCounter = 0;
+
+            InOutHandler_.listInUpdated += (o, args) =>
+               {
+                   _evenCounter++;
+                   newList = args.listEntered;
+               };
+            foreach (var track in _testTracks)
+            {
+                fakeTrackFactory_.TrackCreated +=
+                    Raise.EventWith(this, new TrackArgs(track));
+
+            }
+
+            Assert.That(_evenCounter, Is.EqualTo(newList.Count));
+            Assert.That(_evenCounter, Is.EqualTo(3));
+            Assert.That(newList.Count, Is.EqualTo(3));
 
         }
-      
-        
-                [Test]
-                public void OnEnteredTrack_TestEvntcalledTheeTimes()
-                {
-                   
-                    List<Track> newList = new List<Track>();
-                    Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12050, 10, 34, "2016111912343892");
-                    Track inserTrack1 = new Track("MCJ523", new Position(15000, 13002), 12400, 10, 34, "2016111932343892");
-                    Track inserTrack2 = new Track("MCJ523", new Position(15000, 13040), 12300, 10, 34, "2016111945343892");
-                    newList.Add(inserTrack);
-                    newList.Add(inserTrack1);
-                    newList.Add(inserTrack2);
 
-                    //int _evenCounter = 0;
-                    //uut_.listInUpdated += (o, arg) => { _evenCounter++; };
-
-                    inAirSpaceObserver_.EnteredTrack += Raise.EventWith(this, new TrackArgs(inserTrack));
-                    inAirSpaceObserver_.EnteredTrack += Raise.EventWith(this, new TrackArgs(inserTrack1));
-                    inAirSpaceObserver_.EnteredTrack += Raise.EventWith(this, new TrackArgs(inserTrack2));
-
-                    Assert.That(newList.Count, Is.EqualTo(3));
-                }
         /*
+                [Test]
+                public void OnLeavingTrack_TestEvntcalledOnes()
+                {
 
-                        [Test]
-                        public void OnLeavingTrack_TestEvntcalledOnes()
-                        {
+                    List<Track> newList = new List<Track>();
+                    Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12000, 10, 34, "2016111912343892");
 
-                            List<Track> newList = new List<Track>();
-                            Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12000, 10, 34, "2016111912343892");
-                            newList.Add(inserTrack);
+                    int _evenCounter = 0;
 
-                            int _evenCounter = 0;
+                    InOutHandler_.listOutUpdated += (o, args) =>
+                    {
+                        _evenCounter++;
+                        newList = args.listLeft;
+                    };
 
-                            uut_.listOutUpdated += (o, arg) => { _evenCounter++; };
+                    fakeTrackFactory_.TrackCreated +=
+                        Raise.EventWith(this, new TrackArgs(inserTrack));
 
-                            inAirSpaceObserver_.LeavingTrack += Raise.EventWith(this, new TrackArgs(inserTrack));
+                    Assert.That(_evenCounter, Is.EqualTo(newList.Count));
+                    Assert.That(_evenCounter, Is.EqualTo(1));
+                    Assert.That(newList.Count, Is.EqualTo(1));
 
-                            Assert.That(_evenCounter, Is.EqualTo(newList.Count));
+                }
 
-                        }
+                [Test]
+                public void OnLeavingTrack_TestEvntcalledTree()
+                {
+                    List<Track> newList = new List<Track>();
+                    Track[] _testTracks = new Track[]
+                    {
+                        new Track("JjgfK742", new Position(89000, 21000), 800, 0, 0, "20180404124520412"),
+                        new Track("SYjg871", new Position(60500, 71000), 550, 0, 0, "20180404124520412"),
+                        new Track("PQki842", new Position(12000, 57432), 1648, 0, 0, "20180404124520412"),
+                        new Track("JjgfK742", new Position(91000, 11000), 800, 0, 0, "20180404124520412"),
+                        new Track("SYjg871", new Position(50500, 91000), 550, 0, 0, "20180404124520412"),
+                        new Track("PQki842", new Position(9000, 67432), 1648, 0, 0, "20180404124520412")
+                    };
 
-                        [Test]
-                        public void OnLeavingTrack_TestEvntcalledTree()
-                        {
+                    int _evenCounter = 0;
 
-                            List<Track> newList = new List<Track>();
-                            Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12050, 10, 34, "2016111912343892");
-                            Track inserTrack1 = new Track("MCJ523", new Position(15000, 13002), 12400, 10, 34, "2016111932343892");
-                            Track inserTrack2 = new Track("MCJ523", new Position(15000, 13040), 12300, 10, 34, "2016111945343892");
-                            newList.Add(inserTrack);
-                            newList.Add(inserTrack1);
-                            newList.Add(inserTrack2);
 
-                            int _evenCounter = 0;
 
-                            uut_.listOutUpdated += (o, arg) => { _evenCounter++; };
+                    InOutHandler_.listOutUpdated += (o, args) =>
+                   {
+                       _evenCounter++;
+                       newList = args.listLeft;
+                   };
 
-                            inAirSpaceObserver_.LeavingTrack += Raise.EventWith(this, new TrackArgs(inserTrack));
-                            inAirSpaceObserver_.LeavingTrack += Raise.EventWith(this, new TrackArgs(inserTrack1));
-                            inAirSpaceObserver_.LeavingTrack += Raise.EventWith(this, new TrackArgs(inserTrack2));
+                    foreach (var track in _testTracks)
+                    {
+                        fakeTrackFactory_.TrackCreated +=
+                            Raise.EventWith(this, new TrackArgs(track));
 
-                            Assert.That(_evenCounter, Is.EqualTo(newList.Count));
+                    }
 
-                        }
-                        */
+                    Assert.That(_evenCounter, Is.EqualTo(newList.Count));
+                    Assert.That(_evenCounter, Is.EqualTo(3));
+                    Assert.That(newList.Count, Is.EqualTo(3));
+
+                }
+                */
+        
+
 
         #endregion
 
@@ -167,10 +199,10 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
                     += Raise.EventWith(this, new TrackArgs(track));
             }
 
-            
+
             //Assert
             Assert.That(eventCounter, Is.EqualTo(0));
-            Assert.That(Dangerlist.Count,Is.EqualTo(0));
+            Assert.That(Dangerlist.Count, Is.EqualTo(0));
 
         }
 
