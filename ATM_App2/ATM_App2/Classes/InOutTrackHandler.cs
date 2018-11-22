@@ -16,31 +16,33 @@ namespace ATM_App2.Classes
     {
         public List<Track> listLeft { get; set; }
     }
-    public class InOutTrack:IInOutTrack
+    public class InOutTrackHandler : IInOutTrack
     {
-        private List<Track> ListIn;
-        private List<Track> ListOut;
-        private List<TimeKeeper> TimerListIn;
-        private List<TimeKeeper> TimerListOut;
-       
+        private List<Track> ListIn_ { get; set; }
+        private List<Track> ListOut_ { get; set; }
+        private List<TimeKeeper> TimerListIn_ { get; set; }
+        private List<TimeKeeper> TimerListOut_ { get; set; }
+
         public event EventHandler<EnteredTrackArgs> listInUpdated;
         public event EventHandler<LeftTrackArgs> listOutUpdated;
 
         private readonly ILogToFile _atmLog;
 
-        public InOutTrack(ILogToFile atmLogEvent = null)
+        public InOutTrackHandler(ILogToFile atmLogEvent = null)
         {
             _atmLog = atmLogEvent ?? new LogToFile();
+            ListOut_ = new List<Track>();
+            ListIn_ = new List<Track>();
+            TimerListIn_ = new List<TimeKeeper>();
+            TimerListOut_ = new List<TimeKeeper>();
         }
         public void OnEnteredTrack(object sender, TrackArgs totrack)
         {
-            List<TimeKeeper> TimerListIn = new List<TimeKeeper>();
-            List<Track> ListIn = new List<Track>();
             TimeKeeper mytime = new TimeKeeper();
             mytime.startTimerIn();
-            TimerListIn.Add(mytime);
-            ListIn.Add(totrack.newTrack_);
-            OnListInUpdated(ListIn);
+            TimerListIn_.Add(mytime);
+            ListIn_.Add(totrack.newTrack_);
+            OnListInUpdated(ListIn_);
             _atmLog.Log(totrack.newTrack_.timestamp_ + totrack.newTrack_.tag_ + " entereed");
         }
 
@@ -53,17 +55,13 @@ namespace ATM_App2.Classes
             return;
         }
 
-
-
         public void OnLeavingTrack(object sender, TrackArgs totrack)
         {
             TimeKeeper mytime = new TimeKeeper();
-            List<Track> ListOut = new List<Track>();
-            List<TimeKeeper> TimerListOut = new List<TimeKeeper>();
             mytime.startTimerOut();
-            TimerListOut.Add(mytime);
-            ListOut.Add(totrack.newTrack_);
-            OnListOutUpdated(ListOut);//do stuff
+            TimerListOut_.Add(mytime);
+            ListOut_.Add(totrack.newTrack_);
+            OnListOutUpdated(ListOut_);//do stuff
             _atmLog.Log(totrack.newTrack_.timestamp_ + totrack.newTrack_.tag_ + " left");
         }
         protected virtual void OnListOutUpdated(List<Track> ListOut)
@@ -76,19 +74,20 @@ namespace ATM_App2.Classes
 
         public void TimeElapsedIn(object sender, EventArgs e)
         {
-            TimerListIn[0].stopTimer();
-            TimerListIn.RemoveAt(0);//RemoveAt removes 1 index
+            TimerListIn_[0].stopTimer();
+            TimerListIn_.RemoveAt(0);//RemoveAt removes 1 index
 
-            ListIn.RemoveAt(0);
-            OnListInUpdated(ListIn);
+            ListIn_.RemoveAt(0);
+            OnListInUpdated(ListIn_);
 
         }
         public void TimeElapsedOut(object sender, EventArgs e)
         {
-            TimerListOut[0].stopTimer();
-            TimerListOut.RemoveAt(0);
-            ListOut.RemoveAt(0);
-            OnListOutUpdated(ListOut);
+            TimerListOut_[0].stopTimer();
+            TimerListOut_.RemoveAt(0);
+
+            ListOut_.RemoveAt(0);
+            OnListOutUpdated(ListOut_);
         }
     }
 

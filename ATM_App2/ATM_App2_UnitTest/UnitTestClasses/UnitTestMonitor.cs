@@ -22,7 +22,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
     class UnitTestMonitor
     {
 
-        private InOutTrack _uut;
+        private InOutTrackHandler _uut;
         private IInAirSpaceObserver fakeAirSpace_;
         private ILogToFile log_;
 
@@ -31,7 +31,7 @@ namespace ATM_App2_UnitTest.UnitTestClasses
         {
             fakeAirSpace_ = Substitute.For<IInAirSpaceObserver>();
             log_ = Substitute.For<ILogToFile>();
-            _uut = new InOutTrack();
+            _uut = new InOutTrackHandler();
 
             fakeAirSpace_.EnteredTrack += _uut.OnEnteredTrack;
             fakeAirSpace_.LeavingTrack += _uut.OnLeavingTrack;

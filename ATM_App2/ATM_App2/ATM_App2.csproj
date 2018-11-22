@@ -55,7 +55,7 @@
   <ItemGroup>
     <Compile Include="Classes\InAirSpaceObserver.cs" />
     <Compile Include="Classes\EventArgs.cs" />
-    <Compile Include="Classes\InOutTrack.cs" />
+    <Compile Include="Classes\InOutTrackHandler.cs" />
     <Compile Include="Classes\Monitor.cs" />
     <Compile Include="Classes\Separation.cs" />
     <Compile Include="Classes\TrackFactory.cs" />

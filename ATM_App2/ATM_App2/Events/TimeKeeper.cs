@@ -14,7 +14,7 @@ namespace ATM_App2.Events
     {
         public EventHandler TimeElapsedIn;//Skal den ikke handle noget??<>??
 
-        public EventHandler TimerElapsedOut;
+        public EventHandler TimeElapsedOut;
         static System.Windows.Forms.Timer timer1 =new System.Windows.Forms.Timer();
 
         
@@ -29,8 +29,9 @@ namespace ATM_App2.Events
         {
             timer1.Interval = 5000; // 5 second
             timer1.Enabled = true;
-            timer1.Tick += TimerElapsedOut;
+            timer1.Tick += TimeElapsedOut;
         }
+        
 
         public void stopTimer()
         {
