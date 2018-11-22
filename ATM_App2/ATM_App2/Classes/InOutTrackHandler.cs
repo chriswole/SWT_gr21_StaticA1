@@ -16,7 +16,7 @@ namespace ATM_App2.Classes
     {
         public List<Track> listLeft { get; set; }
     }
-    public class InOutTrackHandler : IInOutTrack
+    public class InOutTrackHandler : IInOutTrackHandler
     {
         private List<Track> ListIn_ { get; set; }
         private List<Track> ListOut_ { get; set; }
