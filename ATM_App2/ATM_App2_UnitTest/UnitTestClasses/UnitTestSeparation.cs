@@ -175,9 +175,6 @@ namespace ATM_App2_UnitTest
         }
 
 
-        // List<Danger> Dangerlist = new List<Danger>();
-        // uut_.DangerListUpdated += (o,args) => { Dangerlist = args.DangerList_; }; // for at "kigge på Dangers sendt til monitor
-
         [Test]
         public void OnAirSpaceUpdated_make1Danger_Remove1Danger()
         {
@@ -213,8 +210,8 @@ namespace ATM_App2_UnitTest
             fakeInAirSpaceObserver_.AirspaceUpdated += Raise.EventWith(this, new AirspaceTrackArgs(trackList));
 
             //Assert
-            Assert.That(eventCounter,Is.EqualTo(2));
-            Assert.That(Dangerlist.Count,Is.EqualTo(0));
+                Assert.That(eventCounter,Is.EqualTo(2));
+                Assert.That(Dangerlist.Count,Is.EqualTo(0));
 
 
         }
