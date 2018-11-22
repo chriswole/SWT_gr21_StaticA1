@@ -51,12 +51,27 @@ namespace ATM_App2_UnitTest.UnitTestEvents
         }
 
         [Test]
-        public void Log_CheckLogDanger_RetrunTrue()
+        public void LogCheckFileExists_CheckLogDanger_RetrunTrue()
         {
+            List<Danger> Dangerlist = new List<Danger>();
+            List<Track> trackList = new List<Track>();
+            Track track1 = new Track("track1", new Position(15000, 40000), 500, 1000, 30, "20180403103240");
+            Track track2 = new Track("track2", new Position(50000, 20000), 850, 1000, 120, "20180403103241");
+            Track track3 = new Track("track3", new Position(80000, 65000), 4700, 1000, 210, "20180403103243");
+            Track track4 = new Track("track4", new Position(12000, 41000), 300, 1000, 300, "20180403103245");
+            Danger testdanger = new Danger(track1, track4, 3162); // distance calculated in mathcad. 
+
+            Dangerlist.Add(testdanger);
+
+            if (File.Exists("SeparationLog.txt"))
+                File.Delete("SeparationLog.txt");
+            _uut.Log(testdanger);
+            var fileExists = (File.Exists("SeparationLog.txt"));
+            Assert.That(fileExists, Is.EqualTo(true));
 
         }
         [Test]
-        public void OnAirSpaceUpdated_1SeparationInList_1DangersMade()
+        public void Log_CheckLogDanger_1DangersLoged_RetrunTrue()
         {
             // Arrange 
             List<Danger> Dangerlist = new List<Danger>();
@@ -66,16 +81,16 @@ namespace ATM_App2_UnitTest.UnitTestEvents
             Track track3 = new Track("track3", new Position(80000, 65000), 4700, 1000, 210, "20180403103243");
             Track track4 = new Track("track4", new Position(12000, 41000), 300, 1000, 300, "20180403103245");
             Danger testdanger = new Danger(track1, track4, 3162); // distance calculated in mathcad. 
-            
+
             Dangerlist.Add(testdanger);
-         //  string testlog=(File.ReadLines("SeparationLog.txt")).Last();
-           // Console.WriteLine(testlog);
- 
+            //  string testlog=(File.ReadLines("SeparationLog.txt")).Last();
+            // Console.WriteLine(testlog);
+
             File.WriteAllText("SeparationLog.txt", string.Empty);
             _uut.Log(testdanger);
-            Assert.That((File.ReadLines("SeparationLog.txt")).Last().Contains(testdanger.track1_.tag_+ " and "+ testdanger.track2_.tag_ + " Distance: 3162"), Is.True);
-          
+            Assert.That((File.ReadLines("SeparationLog.txt")).Last().Contains(testdanger.track1_.tag_ + " and " + testdanger.track2_.tag_ + " Distance: 3162"), Is.True);
+
         }
-       
+
     }
 }
