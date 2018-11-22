@@ -41,6 +41,9 @@ namespace ATM_App2_UnitTest
 
 
         [TestCase(0, 0, "2018111519330000", 0, 100, "2018111519330100", 100.0)]
+        [TestCase(0, 0, "2018111519330100", 0, 100, "2018111519330000", 100.0)]
+        [TestCase(0, 0, "2015100621345600", 0, 100, "2015100621345700", 100.0)]
+        [TestCase(0, 0, "2015100621345700", 0, 100, "2015100621345600", 100.0)]
         public void GetTrackVelocityTest(int x1, int y1, string timestamp1, 
                                          int x2, int y2, string timestamp2, double result)
         {
