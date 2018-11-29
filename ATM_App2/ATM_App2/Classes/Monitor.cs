@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Linq.Expressions;
@@ -12,82 +13,92 @@ using ATM_App2.Interfaces;
 
 namespace ATM_App2.Classes
 {
-    public class Monitor 
+    public class Monitor
     {
+        private List<Track> trackEntering = new List<Track>();
+        private List<Track> trackLeaving = new List<Track>();
+        private List<Danger> activeDangers = new  List<Danger>();
+        private List<Track> trackInAirspace = new List<Track>();
+
+        public void setEnter(List<Track> listName)
+        {
+            trackEntering = listName;
+        }
+
+        public void setLeave(List<Track> listName)
+        {
+            trackLeaving = listName;
+        }
+        public void setDanger(List<Danger> listName)
+        {
+            activeDangers = listName;
+        }
+        public void setInAir(List<Track> listName)
+        {
+            trackInAirspace = listName;
+        }
+
         //Constructor
         public Monitor()
         {
 
         }
 
-        public void InitMonitor()
+
+        public void UpdateMonitor()
         {
-            List<Monitor> airspaceMonitored = new List<Monitor>();
-            List<Monitor> updatedAirspaceMonitored = new List<Monitor>();
-
-            if (airspaceMonitored.Count==0)
+            Console.WriteLine("Active Dangers:");
+            foreach (var obj in activeDangers)
             {
-                Console.WriteLine("There are currently no planes in the airspace");
+                obj.print();
             }
-
-            else
+            Console.WriteLine("Entering tracks:");
+            foreach (var obj in trackEntering)
             {
-                //Adds the airspaceMonitored list to the updatedAirspaceMonitored list
-                updatedAirspaceMonitored.AddRange(airspaceMonitored);
-                //Clears airspaceMonitored list
-                airspaceMonitored.Clear();
-                //Writes out the planes in the airspace monitored in console
-                updatedAirspaceMonitored.ForEach(Console.WriteLine);
-
+                obj.print();
             }
-            
-
-        }
-
-        public void UpdateMonitor(ISeparation monitoring)
-        {
-
-            //Subscribing to planes entering the airspace
-            InOutTrackHandler entering = new InOutTrackHandler();
-            entering.listInUpdated += new System.EventHandler<EnteredTrackArgs>(OnEntered);
-            
-            //Subscribing to planes leaving the airspace
-            InOutTrackHandler leaving = new InOutTrackHandler();
-            leaving.listOutUpdated += new System.EventHandler<LeftTrackArgs>(OnDeleted);
-
-
-            //Subscribing to Separation events
-            monitoring.DangerListUpdated += new EventHandler<DangerlistArgs>(OnNewDanger);
-            
+            Console.WriteLine("Leaving tracks:");
+            foreach (var obj in trackLeaving)
+            {
+                obj.print();
+            }
+            Console.WriteLine("Active tracks in airspace:");
+            foreach (var obj in trackInAirspace)
+            {
+                obj.print();
+            }
 
         }
 
         
-        private void OnEntered(object sender, EnteredTrackArgs e) 
+        public void OnListInUpdated(object sender, EnteredTrackArgs e)
         {
-            List<Monitor> enterList = new List<Monitor>();
-            //Listing planes entering airspace
-            Console.WriteLine("{0} has entered til airspace", e.listEntered);
-            //enterList.Add(listEntered);
-            //airspaceMonitored.AddRange(enterList);
-            //enterList.Clear();
-
+            trackEntering = e.listEntered;
+            
+            UpdateMonitor();
         }
 
-        private void OnDeleted(object sender, LeftTrackArgs e)
+        public void OnListOutUpdated(object sender, LeftTrackArgs e)
         {
-            List<Monitor> leavingList = new List<Monitor>();
-            //Listing planes leaving airspace
-            Console.WriteLine("{0} has left the airspace", e.listLeft);
-            //leavingList.Add(listLeft);
-            //airspaceMonitored.AddRange(leavingList);
-            //leavingList.Clear();
+            trackLeaving = e.listLeft;
+
+            UpdateMonitor();
         }
 
-        private void OnNewDanger(object sender, DangerlistArgs e)
+        public void OnDangerListUpdated(object sender, DangerlistArgs e)
         {
-            //Listing active dangers
-            Console.WriteLine("{0} are too close!", e.DangerList_);
+            activeDangers = e.DangerList_;
+
+            UpdateMonitor();
         }
+
+        public void OnAirspaceUpdated(object sender, AirspaceTrackArgs e)
+        {
+            trackInAirspace = e.TracksInAirSpace;
+
+            UpdateMonitor();
+        }
+
+
     }
 }
