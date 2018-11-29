@@ -98,13 +98,14 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
         }
 
-        /*
+        
                 [Test]
                 public void OnLeavingTrack_TestEvntcalledOnes()
                 {
 
                     List<Track> newList = new List<Track>();
-                    Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12000, 10, 34, "2016111912343892");
+                    Track inserTrack = new Track("MCJ523", new Position(15000, 13000), 12000, 0, 0, "20161119123438924");
+                    Track inserTrack2 = new Track("MCJ523", new Position(15000, 9000), 12000, 0, 0, "20161119123938925");
 
                     int _evenCounter = 0;
 
@@ -116,26 +117,28 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
                     fakeTrackFactory_.TrackCreated +=
                         Raise.EventWith(this, new TrackArgs(inserTrack));
+                    fakeTrackFactory_.TrackCreated +=
+                        Raise.EventWith(this, new TrackArgs(inserTrack2));
 
                     Assert.That(_evenCounter, Is.EqualTo(newList.Count));
                     Assert.That(_evenCounter, Is.EqualTo(1));
                     Assert.That(newList.Count, Is.EqualTo(1));
 
                 }
-        */
-             /*
+        
+             
                 [Test]
                 public void OnLeavingTrack_TestEvntcalledTree()
                 {
                     List<Track> newList = new List<Track>();
                     Track[] _testTracks = new Track[]
                     {
-                        new Track("JjgfK742", new Position(89000, 21000), 800, 0, 0, "20180404124520412"),
-                        new Track("SYjg871", new Position(60500, 71000), 550, 0, 0, "20180404124520412"),
-                        new Track("PQki842", new Position(12000, 57432), 1648, 0, 0, "20180404124520412"),
-                        new Track("JjgfK742", new Position(91000, 11000), 800, 0, 0, "20180404124520412"),
-                        new Track("SYjg871", new Position(50500, 91000), 550, 0, 0, "20180404124520412"),
-                        new Track("PQki842", new Position(9000, 67432), 1648, 0, 0, "20180404124520412")
+                        new Track("JjgfK742", new Position(89000, 21000), 800, 0, 0, "201804041245204124"),
+                        new Track("SYjg871", new Position(60500, 71000), 550, 0, 0, "201804041246204124"),
+                        new Track("PQki842", new Position(12000, 57432), 1648, 0, 0, "201804041247204124"),
+                        new Track("JjgfK742", new Position(91000, 11000), 800, 0, 0, "201804041248204124"),
+                        new Track("SYjg871", new Position(50500, 91000), 550, 0, 0, "201804041249204124"),
+                        new Track("PQki842", new Position(9000, 67432), 1648, 0, 0, "201804041250204124")
                     };
 
                     int _evenCounter = 0;
@@ -160,7 +163,7 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
                     Assert.That(newList.Count, Is.EqualTo(3));
 
                 }
-                */
+                
         
 
 
@@ -176,14 +179,14 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             List<Danger> Dangerlist = new List<Danger>();
             Track[] _testTracks = new Track[]
             {
-                //new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520412"),
-                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "20180304124520412"),
-                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520412"),
-                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "20180304124520412"),
+                //new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304125040414"),
+                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "201803041245204124"),
+                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "201803041245204124"),
+                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "201803041245204124"),
                 //new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "20180304124520412"),
-                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "20180304124520412"),
-                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "20180304124520412"),
-                new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304124520412")
+                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "201803041245204124"),
+                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "201803041245204124"),
+                new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "201803041245204124")
             };
 
             int eventCounter = 0;
@@ -215,14 +218,14 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             List<Danger> Dangerlist = new List<Danger>();
             Track[] _testTracks = new Track[]
             {
-                new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520412"),
-                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "20180304124520412"),
-                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520412"),
-                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "20180304124520412"),
+                new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "201803041245204124"),
+                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "201803041245204124"),
+                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "201803041245204124"),
+                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "201803041245204124"),
                 //new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "20180304124520412"),
-                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "20180304124520412"),
-                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "20180304124520412"),
-                //new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304124520412")
+                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "201803041245204124"),
+                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "201803041245204124"),
+                //new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304125040414")
             };
             Danger testdanger = new Danger(_testTracks[0], _testTracks[1], 1802);
 
@@ -256,14 +259,14 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             List<Danger> Dangerlist = new List<Danger>();
             Track[] _testTracks = new Track[]
             {
-                new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520412"),
-                new Track("JASK742", new Position(25000, 12500), 8000, 0, 0, "20180304124520412"),
-                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520412"),
-                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "20180304124520412"),
+                new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "201803041245204124"),
+                new Track("JASK742", new Position(25000, 12500), 8000, 0, 0, "201803041245204124"),
+                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "201803041245204124"),
+                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "201803041245204124"),
                 //new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "20180304124520412"),
-                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "20180304124520412"),
-                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "20180304124520412"),
-                //new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304124520412")
+                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "201803041245204124"),
+                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "201803041245204124"),
+                //new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304125040414")
             };
 
             int eventCounter = 0;
@@ -294,14 +297,14 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             List<Danger> Dangerlist = new List<Danger>();
             Track[] _testTracks = new Track[]
             {
-                //new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520412"),
-                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "20180304124520412"),
-                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520412"),
-                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "20180304124520412"),
+                //new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304125040414"),
+                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "201803041245204124"),
+                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "201803041245204124"),
+                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "201803041245204124"),
                 //new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "20180304124520412"),
-                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "20180304124520412"),
-                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "20180304124520412"),
-                new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304124520412")
+                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "201803041245204124"),
+                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "201803041245204124"),
+                new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "201803041245204124")
             };
 
             int eventCounter = 0;
@@ -334,14 +337,14 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             List<Danger> Dangerlist = new List<Danger>();
             Track[] _testTracks = new Track[]
             {
-                new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "2018030412452041"),
-                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "2018030412452041"),
-                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "2018030412452041"),
-                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "2018030412452041"),
-                new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "2018030412452041"),
-                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "2018030412452041"),
-                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "2018030412452041"),
-                new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "2018030412454041")
+                new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520414"),
+                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "20180304124520414"),
+                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520414"),
+                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "20180304124520414"),
+                new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "20180304124520414"),
+                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "20180304124520414"),
+                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "20180304124520414"),
+                new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304125040414")
             };
 
             int eventCounter = 0;
@@ -372,14 +375,14 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
             List<Danger> Dangerlist = new List<Danger>();
             Track[] _testTracks = new Track[]
             {
-                new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "2018030412452041"),
-                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "2018030412452041"),
-                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "2018030412452041"),
-                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "2018030412452041"),
-                new Track("WUAX143", new Position(55200, 64500), 500, 0, 0, "2018030412452041"),
-                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "2018030412452041"),
-                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "2018030412452041"),
-                new Track("HSAN329", new Position(24500, 12000), 600, 0, 0, "2018030412454041")
+                new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520414"),
+                new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "20180304124520414"),
+                new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124720414"),
+                new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "20180304124720414"),
+                new Track("WUAX143", new Position(55200, 64500), 500, 0, 0, "20180304124820414"),
+                new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "20180304124820414"),
+                new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "20180304124920414"),
+                new Track("HSAN329", new Position(24500, 12000), 600, 0, 0, "20180304125040414")
             };
 
             int eventCounter = 0;
@@ -408,14 +411,14 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
         /*
         //Arrange
-        Track track1 = new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "20180304124520412");
-        Track track2 = new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "20180304124520412");
-        Track track3 = new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "20180304124520412");
-        Track track4 = new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "20180304124520412");
-        Track track5 = new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "20180304124520412");
-        Track track6 = new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "20180304124520412");
-        Track track7 = new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "20180304124520412");
-        Track track8 = new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304124520412");
+        Track track1 = new Track("HSAN329", new Position(24000, 11000), 550, 0, 0, "201803041245204124");
+        Track track2 = new Track("JASK742", new Position(25000, 12500), 800, 0, 0, "201803041245204124");
+        Track track3 = new Track("SYMS871", new Position(54050, 64800), 550, 0, 0, "201803041245204124");
+        Track track4 = new Track("PQAS842", new Position(12400, 67842), 1648, 0, 0, "201803041245204124");
+        Track track5 = new Track("WUAX143", new Position(55200, 64500), 15340, 0, 0, "201803041245204124");
+        Track track6 = new Track("CLAR274", new Position(65740, 11000), 6700, 0, 0, "201803041245204124");
+        Track track7 = new Track("AIAS527", new Position(30000, 24500), 900, 0, 0, "201803041245204124");
+        Track track8 = new Track("HSAN329", new Position(38000, 30000), 4000, 0, 0, "20180304125040414");
         separations: 1-2,3-5
 
         */
