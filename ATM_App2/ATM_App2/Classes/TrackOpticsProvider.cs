@@ -58,12 +58,12 @@ namespace ATM_App2.Classes
         private double GetSecondsBetweenTimeStamps(string oldTimeStamp, string newTimeStamp)
         {
             
-           DateTime firstTime = DateTime.ParseExact(oldTimeStamp, "yyyyMMddHHmmssff",
+           DateTime firstTime = DateTime.ParseExact(oldTimeStamp, "yyyyMMddHHmmssfff",
 
                new DateTimeFormatInfo());
 
 
-            DateTime secondTime = DateTime.ParseExact(newTimeStamp, "yyyyMMddHHmmssff",
+            DateTime secondTime = DateTime.ParseExact(newTimeStamp, "yyyyMMddHHmmssfff",
                 new DateTimeFormatInfo());
 
 
