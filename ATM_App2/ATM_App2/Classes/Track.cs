@@ -74,6 +74,11 @@ namespace ATM_App2.Classes
                 return true;
             }
         }
+
+        public void print()
+        {
+            Console.WriteLine("tag: {0} Position: {1},{2} Altitude: {3} velocity: {4} course: {5} Time: {6}", tag_, pos_.x_, pos_.y_, altitude_, hori_velocity_, course_, timestamp_);
+        }
     }
 }
 
