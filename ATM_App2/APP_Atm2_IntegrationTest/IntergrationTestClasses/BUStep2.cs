@@ -167,8 +167,8 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
            
             List<string> testData_ = new List<string>()
             {
-                "ATR423;12000;12000;14000;2015100621345600",
-                "ATR423;14000;14000;14000;2015100621345700"
+                "ATR423;12000;12000;14000;20151006213456000",
+                "ATR423;14000;14000;14000;20151006213457000"
             };
 
            List<Track> newAirspace = new List<Track>();
@@ -189,14 +189,14 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
             Track[] _testTracks = new Track[]
             {
-                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "2015100621345600"),
-                new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "2015100621345700")
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456000"),
+                new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "20151006213457000")
             };
 
             List<string> testData_ = new List<string>()
             {
-                "ATR423;12000;12000;14000;2015100621345700",
-                "ATR423;14000;12000;14000;2015100621345600"
+                "ATR423;12000;12000;14000;20151006213457000",
+                "ATR423;14000;12000;14000;20151006213456000"
             };
 
            
@@ -220,14 +220,14 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
             Track[] _testTracks = new Track[]
             {
-                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "2015100621345600"),
-                new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "2015100621345700")
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456000"),
+                new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "20151006213457000")
             };
 
             List<string> testData_ = new List<string>()
             {
-                "ATR423;12000;12000;14000;2015100621345600",
-                "ATR423;14000;12000;14000;2015100621345700"
+                "ATR423;12000;12000;14000;20151006213456000",
+                "ATR423;14000;12000;14000;20151006213457000"
             };
 
 
@@ -258,16 +258,16 @@ namespace APP_Atm2_IntegrationTest.IntergrationTestClasses
 
             Track[] _testTracks = new Track[]
             {
-                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
+                new Track("ATR423", new Position(12000, 12000), 14000, 0, 0, "20151006213456780"),
                 new Track("BB423", new Position(12000, 12000), 14000, 0, 0, "20151006213456789"),
                 new Track("ATR423", new Position(14000, 12000), 14000, 0, 0, "20151006213456790")
             };
 
             List<string> testData_ = new List<string>()
             {
-                "ATR423;12000;12000;14000;2015100621345600",
-                "BB423;12000;12000;14000;20151006213456700",
-                "ATR423;14000;12000;14000;2015100621345700"
+                "ATR423;12000;12000;14000;20151006213456000",
+                "BB423;12000;12000;14000;201510062134567000",
+                "ATR423;14000;12000;14000;20151006213457000"
             };
 
            List<Track> newAirspace = new List<Track>();
