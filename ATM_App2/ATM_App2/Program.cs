@@ -20,7 +20,7 @@ namespace ATM_App2
             Position pos=new Position(24134, 214124);
             Track track=new Track("Hans",pos,2134,134,345,"dd.mm.yyyyy");
             LogToFile log=new LogToFile(); */
-            /*
+            
             
             ITransponderReceiver receiver = TransponderReceiver.TransponderReceiverFactory.CreateTransponderDataReceiver();
             ITrackFactory trackFactory = new TrackFactory(receiver, new StringParser());
@@ -44,8 +44,8 @@ namespace ATM_App2
             inOutTrackHandler.listOutUpdated += monitorHandler.OnListOutUpdated;
             airspaceObserver.AirspaceUpdated += monitorHandler.OnAirspaceUpdated;
             
+            monitorHandler.UpdateMonitor();
             
-            */
 
 
 
@@ -62,13 +62,13 @@ namespace ATM_App2
             */
             
             //System.Console.WriteLine("Logging events to file...");
-/*
+
             while (true)
             {
                 // need some kind of escape clause
             }
             
-            */
+            
 
             /*
             // Test af Monitor

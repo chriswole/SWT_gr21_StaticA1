@@ -42,7 +42,13 @@ namespace ATM_App2.Classes
 
             public void CalculateDistances(List<Track> trackList)
             {
+                if (trackList.Count==0)
+                {
+                    return;
+                   
+                }
                 var newTrack = trackList[0];
+                
                 if (Dangers_.Count!=0)
                 {
                     Dangers_ = RemoveOldDangers(newTrack, Dangers_);

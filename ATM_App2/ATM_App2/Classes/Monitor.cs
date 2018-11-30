@@ -47,23 +47,31 @@ namespace ATM_App2.Classes
 
         public void UpdateMonitor()
         {
-            Console.WriteLine("Active Dangers:");
-            foreach (var obj in activeDangers)
-            {
-                obj.print();
-            }
+            Console.Clear();
+            
             Console.WriteLine("Entering tracks:");
             foreach (var obj in trackEntering)
             {
                 obj.print();
             }
+            
+            
+            Console.WriteLine("Active tracks in airspace:");
+            Console.WriteLine(trackInAirspace.Count);
+            
+            foreach (var obj in trackInAirspace)
+            {
+                obj.print();
+            }
+            
+
             Console.WriteLine("Leaving tracks:");
             foreach (var obj in trackLeaving)
             {
                 obj.print();
             }
-            Console.WriteLine("Active tracks in airspace:");
-            foreach (var obj in trackInAirspace)
+            Console.WriteLine("Active Dangers:");
+            foreach (var obj in activeDangers)
             {
                 obj.print();
             }
